@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
       </Head>
       <AppBar position="fixed">
         <Toolbar>
-          <Typography>WEB Site Name</Typography>
+          <Typography>WEB Site Nsmne</Typography>
         </Toolbar>
       </AppBar>
       <Container>{children}</Container>

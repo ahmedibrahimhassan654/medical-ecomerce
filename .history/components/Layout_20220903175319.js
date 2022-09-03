@@ -1,7 +1,7 @@
-import React, { Children } from "react";
+import React from "react";
 import Head from "next/head";
 import { AppBar, Container, Toolbar, Typography } from "@mui/material";
-const Layout = ({ children }) => {
+const Layout = () => {
   return (
     <div>
       <Head>
@@ -9,11 +9,12 @@ const Layout = ({ children }) => {
       </Head>
       <AppBar position="fixed">
         <Toolbar>
-          <Typography>WEB Site Name</Typography>
+          <Typography>WEB Site NAmne</Typography>
         </Toolbar>
       </AppBar>
-      <Container>{children}</Container>
-      <footer>All rights reserved</footer>
+      <Container>
+        {}
+      </Container>
     </div>
   );
 };
