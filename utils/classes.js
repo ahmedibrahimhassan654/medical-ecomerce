@@ -8,7 +8,7 @@ const classes = {
     },
   },
   main: {
-    minHeight: "90vh",
+    minHeight: "80vh",
   },
   footer: {
     marginTop: 1,
