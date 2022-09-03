@@ -14,10 +14,8 @@ const Layout = ({ children }) => {
           <Typography>WEB Site Name</Typography>
         </Toolbar>
       </AppBar>
-      <Container sx={classes.main}>{children}</Container>
-      <footer sx={classes.footer}>
-        <Typography>All rights reserved. Next Amazona.</Typography>
-      </footer>
+      <Container >{children}</Container>
+      <footer>All rights reserved</footer>
     </div>
   );
 };

@@ -9,15 +9,13 @@ const Layout = ({ children }) => {
       <Head>
         <title>web site name</title>
       </Head>
-      <AppBar position="fixed" sx={classes.appbar}>
+      <AppBar position="fixed" sx={classes.appbar} >
         <Toolbar>
           <Typography>WEB Site Name</Typography>
         </Toolbar>
       </AppBar>
-      <Container sx={classes.main}>{children}</Container>
-      <footer sx={classes.footer}>
-        <Typography>All rights reserved. Next Amazona.</Typography>
-      </footer>
+      <Container>{children}</Container>
+      <footer>All rights reserved</footer>
     </div>
   );
 };

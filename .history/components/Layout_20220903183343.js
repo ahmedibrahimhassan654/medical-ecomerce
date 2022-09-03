@@ -15,9 +15,7 @@ const Layout = ({ children }) => {
         </Toolbar>
       </AppBar>
       <Container sx={classes.main}>{children}</Container>
-      <footer sx={classes.footer}>
-        <Typography>All rights reserved. Next Amazona.</Typography>
-      </footer>
+      <footer >All rights reserved</footer>
     </div>
   );
 };

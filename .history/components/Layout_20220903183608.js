@@ -16,6 +16,7 @@ const Layout = ({ children }) => {
       </AppBar>
       <Container sx={classes.main}>{children}</Container>
       <footer sx={classes.footer}>
+        {" "}
         <Typography>All rights reserved. Next Amazona.</Typography>
       </footer>
     </div>
