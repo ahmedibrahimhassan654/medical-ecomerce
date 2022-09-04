@@ -1,19 +1,21 @@
 // import Head from 'next/head'
+import { Grid } from "@mui/material";
 import Image from "next/image";
 import Layout from "../components/Layout";
+import ProductCard from "../components/product/ProductCard";
 import styles from "../styles/Home.module.css";
+import data from "../utils/data";
 
 export default function Home() {
   return (
     <Layout>
       <div>
         <h1>products</h1>
-        <ul>
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-          <li>4</li>
-        </ul>
+        <Grid container spacing={3} >
+          {data.products.map((product) => (
+            <ProductCard product={product} />
+          ))}
+        </Grid>
       </div>
     </Layout>
   );
