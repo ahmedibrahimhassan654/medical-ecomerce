@@ -8,7 +8,7 @@ import { Grid, Rating, Button, CardActions } from "@mui/material";
 
 const ProductCard = ({ product }) => {
   return (
-    <Grid item md={4} key={product.name}>
+    <Grid item md={4} xs={12} key={product.name}>
       <NextLink href={`/product/${product.slug}`} passHref>
         <Card
           variant="outlined"

@@ -8,67 +8,81 @@ import {
   Link,
   Toolbar,
   Typography,
-  Tabs,
-  Tab,
   Box,
   Paper,
-  Grid,
-  Stack,
   Button,
-  IconButton,
+  CssBaseline,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import { createTheme } from "@mui/material/styles";
 import NextLink from "next/link";
-const navItems = ["cart", "login"];
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
+import { ThemeProvider } from "styled-components";
+
 const Layout = ({ title, children, description }) => {
-  const [value, setValue] = React.useState(0);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const theme = createTheme({
+    typography: {
+      h1: {
+        fontSize: "16rem",
+        fontWeight: 400,
+        margin: "1rem 0",
+      },
+      h2: {
+        fontSize: "1.4rem",
+        fontWeight: 400,
+        margin: "1rem 0",
+      },
+      body1: {
+        fontWeight: "normal",
+      },
+    },
+    palette: {
+      type: "light",
+      primary: {
+        main: "#f0c000",
+      },
+      secondary: {
+        main: "#208080",
+      },
+    },
+  });
   return (
     <div>
       <Head>
         <title>{title ? `${title}- American Drugs` : "American Drugs"}</title>
         {description && <meta name="description" content={description}></meta>}
       </Head>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static" sx={classes.appbar}>
-          <Toolbar>
-            <NextLink href="/" passHref>
-              <Link underline="none">
-                <Typography
-                  sx={classes.brand}
-                  variant="h6"
-                  color="inherit"
-                  component="div"
-                >
-                  American Drugs
-                </Typography>
-              </Link>
-            </NextLink>
-            <NextLink href="login" passHref>
-              <Link underline="none">
-                <Button color="inherit" sx={{ marginLeft: 150 }}>
-                  Login
-                </Button>
-              </Link>
-            </NextLink>
-            <NextLink href="cart" passHref>
-              <Link underline="none">
-                <Button color="inherit" sx={{ marginLeft: 10 }}>
-                  cart
-                </Button>
-              </Link>
-            </NextLink>
-          </Toolbar>
-          {/* <Toolbar>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Box sx={{ flexGrow: 1 }}>
+          <AppBar position="static" sx={classes.appbar}>
+            <Toolbar>
+              <NextLink href="/" passHref>
+                <Link underline="none">
+                  <Typography
+                    sx={classes.brand}
+                    variant="h6"
+                    color="inherit"
+                    component="div"
+                  >
+                    American Drugs
+                  </Typography>
+                </Link>
+              </NextLink>
+              <NextLink href="login" passHref>
+                <Link underline="none">
+                  <Button color="inherit" sx={{ marginLeft: 150 }}>
+                    Login
+                  </Button>
+                </Link>
+              </NextLink>
+              <NextLink href="cart" passHref>
+                <Link underline="none">
+                  <Button color="primary" sx={{ marginLeft: 10 }}>
+                    cart
+                  </Button>
+                </Link>
+              </NextLink>
+            </Toolbar>
+            {/* <Toolbar>
           <NextLink href="/" passHref>
             <Link underline="none">
               <Typography
@@ -83,15 +97,16 @@ const Layout = ({ title, children, description }) => {
           </NextLink>
          
         </Toolbar> */}
-        </AppBar>
-      </Box>
+          </AppBar>
+        </Box>
 
-      <Container sx={classes.main}>{children}</Container>
-      <footer sx={classes.footer}>
-        <Typography align="center">
-          All rights reserved. Next Amazona.
-        </Typography>
-      </footer>
+        <Container sx={classes.main}>{children}</Container>
+        <footer sx={classes.footer}>
+          <Typography align="center">
+            All rights reserved. Next Amazona.
+          </Typography>
+        </footer>
+      </ThemeProvider>
     </div>
   );
 };

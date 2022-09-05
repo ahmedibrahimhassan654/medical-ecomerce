@@ -58,7 +58,7 @@ const ProductScreen = () => {
           <Card>
             <List>
               <ListItem>
-                <Typography component="h1" variant="h6">
+                <Typography component="h1" variant="h3">
                   {product.name}
                 </Typography>
               </ListItem>
