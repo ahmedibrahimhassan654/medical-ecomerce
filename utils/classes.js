@@ -10,6 +10,7 @@ const classes = {
   main: {
     minHeight: "80vh",
   },
+  brand: { fontWeight: "bold", fontSize: "1.5rem", flexGrow: 1 },
   footer: {
     marginTop: 1,
     textAlign: "center",

@@ -11,7 +11,7 @@ export default function Home() {
     <Layout>
       <div>
         <h1>products</h1>
-        <Grid container spacing={3} >
+        <Grid container spacing={4}>
           {data.products.map((product) => (
             <ProductCard product={product} />
           ))}

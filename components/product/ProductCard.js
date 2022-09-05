@@ -19,7 +19,7 @@ const ProductCard = ({ product }) => {
     <Grid item md={4} key={product.name}>
       <Card
         variant="outlined"
-        sx={{ minWidth: "320px", borderStyle: "solid", borderColor: "green" }}
+        sx={{ minWidth: "320px", borderStyle: "solid", borderColor: "#203040" }}
       >
         <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
           <Typography
@@ -54,14 +54,13 @@ const ProductCard = ({ product }) => {
         <AspectRatio minHeight="120px" maxHeight="200px" sx={{ my: 2 }}>
           <img src={product.image} alt="" />
         </AspectRatio>
-        <Box sx={{ display: "flex" }}>
+        <Box sx={{ display: "flex", gap: 1 }}>
           <div>
             <Box
               sx={{
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                gap: 2,
               }}
             >
               <Typography
@@ -90,7 +89,7 @@ const ProductCard = ({ product }) => {
         <CardActions>
           <Button
             variant="contained"
-            size="md"
+            size="small"
             color="primary"
             startIcon={<AddShoppingCartIcon />}
           >
