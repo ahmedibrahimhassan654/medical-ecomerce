@@ -12,10 +12,9 @@ const classes = {
   },
   brand: { fontWeight: "bold", fontSize: "1.5rem", flexGrow: 1 },
   footer: {
-    marginTop: 1,
     textAlign: "center",
     marginTop: 6,
-    minHeight: 2,
+    minHeight: 10,
   },
 };
 

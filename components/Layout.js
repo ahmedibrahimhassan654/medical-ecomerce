@@ -27,7 +27,7 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
-const Layout = ({ children }) => {
+const Layout = ({ title, children, description }) => {
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -35,7 +35,8 @@ const Layout = ({ children }) => {
   return (
     <div>
       <Head>
-        <title>web site name</title>
+        <title>{title ? `${title}- American Drugs` : "American Drugs"}</title>
+        {description && <meta name="description" content={description}></meta>}
       </Head>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" sx={classes.appbar}>
@@ -48,7 +49,7 @@ const Layout = ({ children }) => {
                   color="inherit"
                   component="div"
                 >
-                  WEB Site Name
+                  American Drugs
                 </Typography>
               </Link>
             </NextLink>

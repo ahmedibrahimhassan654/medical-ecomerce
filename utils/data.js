@@ -17,7 +17,7 @@ const data = {
   products: [
     {
       name: "midical1",
-      slug: "free-shirt",
+      slug: "midical-1",
       category: "heart ",
       image: "/images/prod1.jpg",
       isFeatured: true,
@@ -30,8 +30,8 @@ const data = {
       description: "molestiae quas vel ",
     },
     {
-      name: "Fit Shirt",
-      slug: "fit-shirt",
+      name: "midical2",
+      slug: "midical-2",
       category: "Shirts",
       image: "/images/prod2.jpg",
       isFeatured: true,
