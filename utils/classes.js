@@ -14,7 +14,7 @@ const classes = {
   footer: {
     textAlign: "center",
     marginTop: 6,
-    minHeight: 10,
+    minHeight: 100,
   },
 };
 

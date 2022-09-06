@@ -12,9 +12,6 @@ import {
   ListItem,
   Card,
   Button,
-  TextField,
-  CircularProgress,
-  Box,
   Rating,
 } from "@mui/material";
 const ProductScreen = () => {

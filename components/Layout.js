@@ -9,7 +9,6 @@ import {
   Toolbar,
   Typography,
   Box,
-  Paper,
   Button,
   CssBaseline,
   Switch,
@@ -157,7 +156,7 @@ const Layout = ({ title, children, description }) => {
         </Box>
 
         <Container sx={classes.main}>{children}</Container>
-        <footer sx={classes.footer}>
+        <footer className={classes.footer}>
           <Typography align="center">
             All rights reserved. Next Amazona.
           </Typography>

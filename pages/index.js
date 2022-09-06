@@ -13,7 +13,7 @@ export default function Home() {
         <h1>products</h1>
         <Grid container spacing={4}>
           {data.products.map((product) => (
-            <ProductCard product={product} />
+            <ProductCard product={product} key={product.name} />
           ))}
         </Grid>
       </div>
