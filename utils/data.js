@@ -92,5 +92,99 @@ const data = {
       description: "A popular pants",
     },
   ],
+  newProducts: [
+    {
+      name: "Acne (TF)",
+      slug: "Acne-(TF)",
+      description:
+        "Tretinoin 0.025% Foam Tretinoin foam can be customized (0.05%, 0.1%) with same price",
+      category: "Acne",
+      image: "/images/prod1.jpg",
+      brand: "brand 1",
+      size: [
+        {
+          unit: "ml",
+          price: "10",
+          count: "30",
+          numberonStock: 5,
+        },
+        {
+          unit: "ml",
+          price: "20",
+          count: "50",
+          numberonStock: 5,
+        },
+      ],
+      requiredPrescription: false,
+    },
+    {
+      name: "Acne",
+      slug: "Acne",
+      description: "Clindamycin 1% Tretinoin 0.025% Cream",
+      category: "Acne",
+      image: "/images/prod2.jpg",
+      brand: "brand 2",
+      size: [
+        {
+          unit: "gm",
+          price: "10",
+          count: "30",
+          numberonStock: 5,
+        },
+        {
+          unit: "ml",
+          price: "20",
+          count: "65",
+          numberonStock: 5,
+        },
+      ],
+      requiredPrescription: false,
+    },
+    {
+      name: "Acne (N) ",
+      slug: "Acne-(N) ",
+      description: "Niacinamide 12% Azelaic acid 5% Zinc oxide 3% Cream",
+      category: "Acne",
+      image: "/images/prod3.jpg",
+      brand: "brand 1",
+      size: [
+        {
+          unit: "gm",
+          price: "10",
+          count: "30",
+          numberonStock: 5,
+        },
+        {
+          unit: "gm",
+          price: "50",
+          count: "60",
+          numberonStock: 5,
+        },
+      ],
+    },
+    {
+      name: "Acne (NC) ",
+      slug: "Acne-(NC) ",
+      description:
+        "Tretinoin 0.025% Foam Tretinoin foam can be customized (0.05%, 0.1%) with same price",
+      category: "Acne",
+      image: "/images/prod1.jpg",
+      brand: "brand 1",
+      size: [
+        {
+          unit: "ml",
+          price: "10",
+          count: "30",
+          numberonStock: 5,
+        },
+        {
+          unit: "ml",
+          price: "20",
+          count: "50",
+          numberonStock: 5,
+        },
+      ],
+    },
+  ],
 };
 export default data;
