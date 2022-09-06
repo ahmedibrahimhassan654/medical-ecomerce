@@ -8,6 +8,8 @@ handler.get(async (req, res) => {
   await db.connect();
   const products = await Product.find({});
   await db.disconnect();
+  // res.status(200);
+  // .json({ success: true, number: products.length, data: products });
   res.send(products);
 });
 

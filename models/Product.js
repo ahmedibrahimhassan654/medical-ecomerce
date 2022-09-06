@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 // const pkgSize = new mongoose.Schema();
 const productSchema = new mongoose.Schema(
   {
-    name: {
+    name: { 
       type: String,
       required: [true, "Please add a product name"],
       trim: true,

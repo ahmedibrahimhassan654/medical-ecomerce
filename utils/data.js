@@ -185,6 +185,30 @@ const data = {
         },
       ],
     },
+
+    {
+      name: "Acne (NC) ",
+      slug: "Acne-(NC) ",
+      description:
+        "Tretinoin 0.025% Foam Tretinoin foam can be customized (0.05%, 0.1%) with same price",
+      category: "Acne",
+      image: "/images/prod1.jpg",
+      brand: "brand 1",
+      size: [
+        {
+          unit: "ml",
+          price: "10",
+          count: "30",
+          numberonStock: 5,
+        },
+        {
+          unit: "ml",
+          price: "20",
+          count: "50",
+          numberonStock: 5,
+        },
+      ],
+    },
   ],
 };
 export default data;

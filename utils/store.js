@@ -4,6 +4,7 @@ import { createContext, useReducer } from "react";
 export const Store = createContext();
 const initialState = {
   darkMode: Cookies.get("darkMode") === "ON" ? true : false,
+  // darkMode: window.localStorage.getItem("darkMode") === "ON" ? true : false,
 };
 
 function reducer(state, action) {

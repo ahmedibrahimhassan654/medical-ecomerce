@@ -1,6 +1,6 @@
 import * as React from "react";
 import NextLink from "next/link";
-//import { Box, Card, Typography, AspectRatio } from "@mui/joy";
+// //import { Box, Card, Typography, AspectRatio } from "@mui/joy";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 import {
@@ -19,7 +19,18 @@ import {
 
 const ProductCard = ({ product }) => {
   return (
-    <Grid item md={4} xs={12} key={product.key}>
+    <Grid
+      item
+      md={3}
+      xs={12}
+      key={product.key}
+      sx={{
+        marginBottom: 5,
+      }}
+    >
+      {/* {console.log(product)} */}
+      {/* {JSON.stringify(product)} */}
+      {/* {JSON.parse(JSON.stringify(product))} */}
       <Card
         sx={{
           maxWidth: 900,
