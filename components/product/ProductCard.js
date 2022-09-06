@@ -22,7 +22,7 @@ const ProductCard = ({ product }) => {
     <Grid item md={4} xs={12} key={product.key}>
       <Card
         sx={{
-          maxWidth: 300,
+          maxWidth: 900,
 
           margin: "auto",
           transition: "0.3s",
