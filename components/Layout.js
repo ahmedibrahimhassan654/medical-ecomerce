@@ -139,7 +139,7 @@ const Layout = ({ title, children, description }) => {
                   </Grid>
                   <Grid item xs>
                     <Stack direction="row" spacing={2}>
-                      <NextLink href="login" passHref>
+                      <NextLink href="/login" passHref>
                         <Link underline="none">
                           <Button color="inherit">Login</Button>
                         </Link>

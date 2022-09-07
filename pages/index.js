@@ -8,8 +8,8 @@ import ProductCard from "../components/product/ProductCard";
 import data from "../utils/data";
 import Product from "../models/Product";
 
-export default function Home() {
-  // const { products } = props;
+export default function Home(props) {
+  const { products } = props;
   return (
     <Layout>
       <Box sx={{ marginBottom: 5 }}>
@@ -24,8 +24,8 @@ export default function Home() {
           {/* {products.map((product) => (
             <ProductCard product={product} key={product.name} />
           ))} */}
-          {data.products.map((product) => (
-            <ProductCard product={product} key={product.name} />
+          {products.map((product) => (
+            <ProductCard product={product} key={product.slug} />
           ))}
         </Grid>
       </Box>
@@ -35,26 +35,13 @@ export default function Home() {
 
 export async function getServerSideProps() {
   await db.connect();
-  const products = await Product.find({}).populate("size").lean();
-  console.log(products);
+  const products = await Product.find({}).lean();
+
   await db.disconnect();
   return {
     props: {
-      products: products.map(db.convertDocToObj),
+      products: JSON.parse(JSON.stringify(products)),
       // products: data,
     },
   };
 }
-
-// export async function getServerSideProps() {
-//   // Fetch data from external API
-//   const res = await fetch(`http://localhost:3000/api/products`);
-//   const data = await res.json();
-
-//   // data.map((prod) => {
-//   //   console.log("product size", prod.size);
-//   // });
-
-//   // // Pass data to the page via props
-//   return { props: { data } };
-// }

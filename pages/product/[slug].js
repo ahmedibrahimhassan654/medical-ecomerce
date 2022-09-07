@@ -14,10 +14,10 @@ import {
   Button,
   Rating,
 } from "@mui/material";
-const ProductScreen = () => {
-  const router = useRouter();
-  const { slug } = router.query;
-  const product = data.products.find((a) => a.slug === slug);
+import Product from "../../models/Product";
+import db from "../../utils/db";
+const ProductScreen = (props) => {
+  const { product } = props;
   if (!product) {
     return (
       <>
@@ -27,6 +27,7 @@ const ProductScreen = () => {
   }
   return (
     <Layout title={product.name} description={product.description}>
+      {JSON.stringify(product)}
       <div>
         <NextLink href="/" passHref>
           <Link underline="none">
@@ -41,7 +42,7 @@ const ProductScreen = () => {
           </Link>
         </NextLink>
       </div>
-      <Grid container spacing={1}>
+      {/*    <Grid container spacing={1}>
         <Grid item md={6} xs={12}>
           <Image
             src={product.image}
@@ -115,9 +116,24 @@ const ProductScreen = () => {
             </List>
           </Card>
         </Grid>
-      </Grid>
+      </Grid> */}
     </Layout>
   );
 };
+
+export async function getServerSideProps(context) {
+  const { params } = context;
+  const { slug } = params;
+  await db.connect();
+  const product = await Product.findOne({ slug }).lean();
+
+  await db.disconnect();
+  return {
+    props: {
+      product: JSON.parse(JSON.stringify(product)),
+      // products: data,
+    },
+  };
+}
 
 export default ProductScreen;
