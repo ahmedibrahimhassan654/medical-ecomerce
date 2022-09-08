@@ -24,6 +24,7 @@ export default function Home(props) {
           {/* {products.map((product) => (
             <ProductCard product={product} key={product.name} />
           ))} */}
+
           {products.map((product) => (
             <ProductCard product={product} key={product.slug} />
           ))}

@@ -20,8 +20,6 @@ import {
 const ProductCard = ({ product }) => {
   return (
     <>
-      {JSON.stringify(product)}
-      //{" "}
       <Grid
         item
         md={3}
@@ -31,9 +29,6 @@ const ProductCard = ({ product }) => {
           marginBottom: 5,
         }}
       >
-        {/* {console.log(product)} */}
-        {/* {JSON.stringify(product)} */}
-        {/* {JSON.parse(JSON.stringify(product))} */}
         <Card
           sx={{
             maxWidth: 900,
@@ -54,11 +49,12 @@ const ProductCard = ({ product }) => {
                 title={product.name}
                 sx={{ paddingTop: "5%", maxHeight: 100, minHeight: 250 }}
               />
-              <CardContent>
+              <CardContent
+                sx={{ paddingTop: "5%", maxHeight: 100, minHeight: 150 }}
+              >
                 <Typography>{product.name}</Typography>
                 <Rating value={product.rating} readOnly></Rating>
                 <Typography>{product.description}</Typography>
-                <Typography>${product.price}</Typography>
               </CardContent>
             </CardActionArea>
           </NextLink>

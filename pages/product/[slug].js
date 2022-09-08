@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import data from "../../utils/data";
 import Layout from "../../components/Layout";
 import NextLink from "next/link";
@@ -13,11 +13,17 @@ import {
   Card,
   Button,
   Rating,
+  Box,
+  IconButton,
 } from "@mui/material";
 import Product from "../../models/Product";
 import db from "../../utils/db";
 const ProductScreen = (props) => {
+  const [price, setPrice] = useState("please chose pakage size");
+  const [stock, setStock] = useState(0);
+
   const { product } = props;
+
   if (!product) {
     return (
       <>
@@ -27,7 +33,6 @@ const ProductScreen = (props) => {
   }
   return (
     <Layout title={product.name} description={product.description}>
-      {JSON.stringify(product)}
       <div>
         <NextLink href="/" passHref>
           <Link underline="none">
@@ -42,7 +47,7 @@ const ProductScreen = (props) => {
           </Link>
         </NextLink>
       </div>
-      {/*    <Grid container spacing={1}>
+      <Grid container spacing={1}>
         <Grid item md={6} xs={12}>
           <Image
             src={product.image}
@@ -76,6 +81,62 @@ const ProductScreen = (props) => {
                 <Typography> Description: {product.description}</Typography>
               </ListItem>
             </List>
+            <List>
+              <ListItem>
+                <Box
+                  sx={{
+                    width: "100%",
+
+                    // paddingLeft: 3,
+                    alignItems: "center",
+                    transition: "0.3s",
+                    boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
+                    "&:hover": {
+                      boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)",
+                    },
+                  }}
+                >
+                  <Box>
+                    {product.size.map((size) => (
+                      <Grid
+                        container
+                        xs={12}
+                        sx={{
+                          marginBottom: 2,
+                          alignItems: "center",
+                          transition: "0.6s",
+                          boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
+                          "&:hover": {
+                            boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)",
+                          },
+                        }}
+                      >
+                        <Button
+                          key={size._id}
+                          fullWidth
+                          variant="contained"
+                          color="primary"
+                          onClick={() => {
+                            setPrice(size.price);
+                            setStock(size.numberonStock);
+                          }}
+                        >
+                          <Grid item xs={12}>
+                            <Typography>size</Typography>
+                          </Grid>
+                          <Grid item xs={12}>
+                            <Typography>
+                              {size.count}
+                              {size.unit}
+                            </Typography>
+                          </Grid>
+                        </Button>
+                      </Grid>
+                    ))}
+                  </Box>
+                </Box>
+              </ListItem>
+            </List>
           </Card>
         </Grid>
         <Grid item md={3} xs={12}>
@@ -87,7 +148,17 @@ const ProductScreen = (props) => {
                     <Typography>Price</Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography>${product.price}</Typography>
+                    <Typography>${price}</Typography>
+                  </Grid>
+                </Grid>
+              </ListItem>
+              <ListItem>
+                <Grid container>
+                  <Grid item xs={6}>
+                    <Typography>stock</Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography>{`${stock} In stock`}</Typography>
                   </Grid>
                 </Grid>
               </ListItem>
@@ -98,7 +169,7 @@ const ProductScreen = (props) => {
                   </Grid>
                   <Grid item xs={6}>
                     <Typography>
-                      {product.countInStock > 0 ? "In stock" : "Unavailable"}
+                      {stock > 0 ? "In stock" : "Unavailable"}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -116,7 +187,7 @@ const ProductScreen = (props) => {
             </List>
           </Card>
         </Grid>
-      </Grid> */}
+      </Grid>
     </Layout>
   );
 };
