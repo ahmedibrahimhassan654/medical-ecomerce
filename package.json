@@ -16,6 +16,7 @@
     "@mui/joy": "^5.0.0-alpha.43",
     "@mui/material": "^5.10.3",
     "@mui/styled-engine-sc": "^5.10.3",
+    "axios": "^0.27.2",
     "babel-plugin-superjson-next": "^0.4.4",
     "express-async-handler": "^1.2.0",
     "js-cookie": "^3.0.1",

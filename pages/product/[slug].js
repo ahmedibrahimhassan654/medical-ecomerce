@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import data from "../../utils/data";
 import Layout from "../../components/Layout";
 import NextLink from "next/link";
@@ -18,9 +18,13 @@ import {
 } from "@mui/material";
 import Product from "../../models/Product";
 import db from "../../utils/db";
+import axios from "axios";
+import { Store } from "../../utils/store";
 const ProductScreen = (props) => {
+  const { dispatch } = useContext(Store);
   const [price, setPrice] = useState("please chose pakage size");
   const [stock, setStock] = useState(0);
+  // const [prescription, setPrescription] = useState();
 
   const { product } = props;
 
@@ -31,6 +35,16 @@ const ProductScreen = (props) => {
       </>
     );
   }
+  const addToCartHandler = async () => {
+    const { data } = await axios.get(`/api/products/${product._id}`);
+    if (stock <= 0) {
+      window.alert("sorry,product is out of stock");
+    }
+    if (price === "please chose pakage size") {
+      window.alert("please check product package size first ");
+    }
+    dispatch({ type: "   ", payload: { ...product, quantity: 1 } });
+  };
   return (
     <Layout title={product.name} description={product.description}>
       <div>
@@ -47,6 +61,7 @@ const ProductScreen = (props) => {
           </Link>
         </NextLink>
       </div>
+      {JSON.stringify(product)}
       <Grid container spacing={1}>
         <Grid item md={6} xs={12}>
           <Image
@@ -119,6 +134,7 @@ const ProductScreen = (props) => {
                           onClick={() => {
                             setPrice(size.price);
                             setStock(size.numberonStock);
+                            // setPrescription(size.requiredPrescription);
                           }}
                         >
                           <Grid item xs={12}>
@@ -175,11 +191,25 @@ const ProductScreen = (props) => {
                 </Grid>
               </ListItem>
               <ListItem>
+                <Grid container>
+                  <Grid item xs={6}>
+                    <Typography>prescription required</Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography>
+                      {product.requiredPrescription
+                        ? "required"
+                        : "not reqired"}
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </ListItem>
+              <ListItem>
                 <Button
                   fullWidth
                   variant="contained"
                   color="primary"
-                  //   onClick={addToCartHandler}
+                  onClick={addToCartHandler}
                 >
                   Add to cart
                 </Button>

@@ -163,6 +163,29 @@ const data = {
       ],
       requiredPrescription: true,
     },
+    {
+      name: "Acne (TD)",
+      slug: "Acne-(TD)",
+      description: "Tretinoin 0.025%  Vit C 2.5%  Hyaluronic Acid 0.3% ",
+      category: "Acne",
+      image: "/images/prod3.jpg",
+      brand: "brand 3",
+      size: [
+        {
+          unit: "gm",
+          price: "10",
+          count: "25",
+          numberonStock: 5,
+        },
+        {
+          unit: "gm",
+          price: "20",
+          count: "20",
+          numberonStock: 15,
+        },
+      ],
+      requiredPrescription: true,
+    },
   ],
 };
 export default data;
