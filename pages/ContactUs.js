@@ -1,10 +1,8 @@
-// import Head from 'next/head'
-
 import Head from "next/head";
+import React from "react";
 import Layout from "../components/Layout";
 
-export default function Home(props) {
-  const { products } = props;
+const ContactUs = () => {
   return (
     <>
       <Head>
@@ -12,8 +10,10 @@ export default function Home(props) {
         <meta name="description"></meta>
       </Head>
       <Layout>
-        
+        <h1 sx={{ marginTop: 10 }}>Contact Us </h1>
       </Layout>
     </>
   );
-}
+};
+
+export default ContactUs;

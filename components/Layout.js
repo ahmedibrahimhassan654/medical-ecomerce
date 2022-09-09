@@ -25,6 +25,7 @@ import NextLink from "next/link";
 //import { ThemeProvider } from "styled-components";
 import { Store } from "../utils/store";
 import Cookies from "js-cookie";
+import NavBar from "./navbar/NavBar";
 const Layout = ({ title, children, description }) => {
   const { state, dispatch } = useContext(Store);
   const { darkMode, cart } = state;
@@ -61,16 +62,21 @@ const Layout = ({ title, children, description }) => {
     Cookies.set("darkMode", newDarkMode ? "ON" : "OFF");
     //   localStorage.setItem("darkMode", newDarkMode ? "ON" : "OFF");
   };
+
+
+
+                  
   return (
     <div>
       <Head>
-        <title>{title ? `${title}- American Drugs` : "American Drugs"}</title>
+        <title>{title ? `${title}- American Drugs` : "American Affordable Drugs Pharmacy"}</title>
         {description && <meta name="description" content={description}></meta>}
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Box sx={{ flexGrow: 1 }}>
-          <AppBar position="static" sx={classes.appbar}>
+          <NavBar></NavBar>
+          {/* <AppBar position="static" sx={classes.appbar}>
             <Toolbar>
               <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={3}>
@@ -123,7 +129,7 @@ const Layout = ({ title, children, description }) => {
                 </Grid>
               </Box>
             </Toolbar>
-          </AppBar>
+          </AppBar> */}
         </Box>
 
         <Container sx={classes.main}>{children}</Container>
