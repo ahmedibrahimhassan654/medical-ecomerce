@@ -35,7 +35,17 @@ const NavBar = () => {
           {/* logo Box*/}
           <Box>
             <IconButton>
-              <VaccinesIcon color="primary" />
+              <VaccinesIcon
+                color="primary"
+                sx={{
+                  marginRight: "20px",
+                  cursor: "pointer",
+                  fontWeight: 400,
+                  //   color: "#33FF57",
+                  //   backgroundColor: "white",
+                  //   color: "Highlight",
+                }}
+              />
             </IconButton>
           </Box>
           {/* App Links  */}
@@ -55,7 +65,15 @@ const NavBar = () => {
                     fontWeight: 400,
                   }}
                 >
-                  <HomeIcon /> Home
+                  <HomeIcon
+                    sx={{
+                      marginRight: "5px",
+                      cursor: "pointer",
+                      fontWeight: 400,
+                      marginTop: "1px",
+                    }}
+                  />{" "}
+                  Home
                 </Typography>
               </Link>
             </NextLink>
@@ -71,7 +89,15 @@ const NavBar = () => {
                     fontWeight: 400,
                   }}
                 >
-                  <ContactsIcon /> Products
+                  <ContactsIcon
+                    sx={{
+                      marginRight: "5px",
+                      cursor: "pointer",
+                      fontWeight: 400,
+                      marginTop: "1px",
+                    }}
+                  />{" "}
+                  Products
                 </Typography>
               </Link>
             </NextLink>
@@ -86,7 +112,15 @@ const NavBar = () => {
                     fontWeight: 400,
                   }}
                 >
-                  <ViewCarouselIcon /> Blogs
+                  <ViewCarouselIcon
+                    sx={{
+                      marginRight: "5px",
+                      cursor: "pointer",
+                      fontWeight: 400,
+                      marginTop: "1px",
+                    }}
+                  />{" "}
+                  Blogs
                 </Typography>
               </Link>
             </NextLink>
@@ -104,7 +138,15 @@ const NavBar = () => {
                   aria-expanded="false"
                   onClick={() => {}}
                 >
-                  <ContactPhoneIcon /> Contact Us
+                  <ContactPhoneIcon
+                    sx={{
+                      marginRight: "5px",
+                      cursor: "pointer",
+                      fontWeight: 400,
+                      marginTop: "1px",
+                    }}
+                  />{" "}
+                  Contact Us
                 </Typography>
                 {/* <Menu id="basic-menu" anchorEl open="false" onClose={() => {}}>
                   <MenuItem>Men1 </MenuItem>

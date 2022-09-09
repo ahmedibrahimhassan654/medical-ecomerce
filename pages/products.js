@@ -12,7 +12,7 @@ export default function Home(props) {
   const { products } = props;
   return (
     <Layout>
-      <Box sx={{ marginBottom: 5 }}>
+      <Box sx={{ marginBottom: 5, marginTop: 20 }}>
         <Typography
           variant="h3"
           color="secondary"
