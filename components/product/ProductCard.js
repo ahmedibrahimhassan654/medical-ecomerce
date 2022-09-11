@@ -29,6 +29,9 @@ const ProductCard = ({ product }) => {
           marginBottom: 5,
         }}
       >
+        {/* <NextLink href={`/products`} passHref>
+          <Typography>Back To All Products pages</Typography>
+        </NextLink> */}
         <Card
           sx={{
             maxWidth: 900,

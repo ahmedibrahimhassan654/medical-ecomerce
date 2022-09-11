@@ -18,35 +18,65 @@ import {
   MenuItem,
 } from "@mui/material";
 
-import React from "react";
-
+import React, { useEffect } from "react";
+import { useTheme } from "@mui/material/styles";
+import { useMediaQuery } from "@mui/material";
+import AppbarMobile from "./AppbarMobile";
+import AppBarDesktop from "./AppBarDesktop";
+import Image from "next/image";
 const NavBar = () => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down("md"));
   return (
-    <AppBar elevation={4} color="secondary">
+    // <>
+    //   {matches ? (
+    //     <AppbarMobile matches={matches} />
+    //   ) : (
+    //     <AppBarDesktop matches={matches} />
+    //   )}
+    // </>
+
+    <AppBar elevation={2} color="secondary">
       <Toolbar>
         <Box
-          component="div"
           sx={{
             display: "flex",
             justifyContent: "space-between",
             width: "100%",
+            alignItems: "center",
+            padding: "10px 0px",
           }}
+          component="div"
         >
           {/* logo Box*/}
-          <Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "flex-start",
+              alignItems: "center",
+            }}
+            component="div"
+          >
             <IconButton>
               <VaccinesIcon
                 color="primary"
                 sx={{
                   marginRight: "20px",
                   cursor: "pointer",
-                  fontWeight: 400,
+                  fontWeight: 500,
+                  fontSize: "10 rem",
                   //   color: "#33FF57",
                   //   backgroundColor: "white",
                   //   color: "Highlight",
                 }}
               />
             </IconButton>
+            {/* <Image
+              src={"/images/logo.jpeg"}
+              width={60}
+              height={50}
+              alt="amirican affordable drugs pfarmacy"
+            /> */}
           </Box>
           {/* App Links  */}
           <Box

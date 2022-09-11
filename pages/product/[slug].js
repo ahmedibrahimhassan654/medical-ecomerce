@@ -47,12 +47,12 @@ const ProductScreen = (props) => {
   };
   return (
     <Layout title={product.name} description={product.description}>
-      <div>
-        <NextLink href="/" passHref>
+      <Box sx={{ display: "flex", marginTop: 5 }}>
+        <NextLink href="/products" passHref>
           <Link underline="none">
             <Typography
               variant="h5"
-              color="inherit"
+              color="secondary"
               component="div"
               sx={{ marginTop: 5, marginBottom: 5 }}
             >
@@ -60,8 +60,10 @@ const ProductScreen = (props) => {
             </Typography>
           </Link>
         </NextLink>
-      </div>
-      {JSON.stringify(product)}
+      </Box>
+
+      <div></div>
+      {/* {JSON.stringify(product)} */}
       <Grid container spacing={1}>
         <Grid item md={6} xs={12}>
           <Image

@@ -15,14 +15,14 @@ import {
   CssBaseline,
   Switch,
   // FormControlLabel,
-  ThemeProvider,
+  // ThemeProvider,
   Stack,
   Grid,
   Badge,
 } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import NextLink from "next/link";
-//import { ThemeProvider } from "styled-components";
+import { ThemeProvider } from "@mui/system";
 import { Store } from "../utils/store";
 import Cookies from "js-cookie";
 import NavBar from "./navbar/NavBar";
@@ -63,18 +63,19 @@ const Layout = ({ title, children, description }) => {
     //   localStorage.setItem("darkMode", newDarkMode ? "ON" : "OFF");
   };
 
-
-
-                  
   return (
     <div>
       <Head>
-        <title>{title ? `${title}- American Drugs` : "American Affordable Drugs Pharmacy"}</title>
+        <title>
+          {title
+            ? `${title}- American Drugs`
+            : "American Affordable Drugs Pharmacy"}
+        </title>
         {description && <meta name="description" content={description}></meta>}
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Box sx={{ flexGrow: 1 }}>
+        <Box>
           <NavBar></NavBar>
           {/* <AppBar position="static" sx={classes.appbar}>
             <Toolbar>
@@ -131,8 +132,8 @@ const Layout = ({ title, children, description }) => {
             </Toolbar>
           </AppBar> */}
         </Box>
-
-        <Container sx={classes.main}>{children}</Container>
+        <Grid md={12}>{children}</Grid>
+        {/* <Container sx={classes.main}>{children}</Container> */}
         <footer className={classes.footer}>
           <Typography align="center">
             All rights reserved. Next Amazona.

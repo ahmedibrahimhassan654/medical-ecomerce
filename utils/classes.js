@@ -8,7 +8,7 @@ const classes = {
     },
   },
   main: {
-    minHeight: "80vh",
+    minHeight: "100%",
   },
   brand: { fontWeight: "bold", fontSize: "1.5rem", flexGrow: 1 },
   footer: {

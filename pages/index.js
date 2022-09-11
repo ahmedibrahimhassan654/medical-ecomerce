@@ -1,6 +1,7 @@
 // import Head from 'next/head'
 
 import Head from "next/head";
+import HeaderComp from "../components/Header/HeaderComp";
 import Layout from "../components/Layout";
 
 export default function Home(props) {
@@ -12,7 +13,7 @@ export default function Home(props) {
         <meta name="description"></meta>
       </Head>
       <Layout>
-        
+        <HeaderComp />
       </Layout>
     </>
   );
