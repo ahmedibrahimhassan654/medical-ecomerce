@@ -26,6 +26,7 @@ import { ThemeProvider } from "@mui/system";
 import { Store } from "../utils/store";
 import Cookies from "js-cookie";
 import NavBar from "./navbar/NavBar";
+import Footer from "./footer/Footer";
 const Layout = ({ title, children, description }) => {
   const { state, dispatch } = useContext(Store);
   const { darkMode, cart } = state;
@@ -134,11 +135,12 @@ const Layout = ({ title, children, description }) => {
         </Box>
         <Grid md={12}>{children}</Grid>
         {/* <Container sx={classes.main}>{children}</Container> */}
-        <footer className={classes.footer}>
+        <Footer />
+        {/* <footer className={classes.footer}>
           <Typography align="center">
             All rights reserved. Next Amazona.
           </Typography>
-        </footer>
+        </footer> */}
       </ThemeProvider>
     </div>
   );

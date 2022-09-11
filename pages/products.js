@@ -20,11 +20,11 @@ export default function Home(props) {
         >
           products
         </Typography>
-        <Grid container spacing={3}>
-          {/* {products.map((product) => (
+
+        {/* {products.map((product) => (
             <ProductCard product={product} key={product.name} />
           ))} */}
-
+        <Grid container md={12} spacing={2} pt={2} pr={5} pl={5}>
           {products.map((product) => (
             <ProductCard product={product} key={product.slug} />
           ))}

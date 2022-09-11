@@ -3,6 +3,7 @@
 import Head from "next/head";
 import HeaderComp from "../components/Header/HeaderComp";
 import Layout from "../components/Layout";
+import FeaturedProducts from "../components/product/FeaturedProducts";
 
 export default function Home(props) {
   const { products } = props;
@@ -14,6 +15,7 @@ export default function Home(props) {
       </Head>
       <Layout>
         <HeaderComp />
+        <FeaturedProducts />
       </Layout>
     </>
   );

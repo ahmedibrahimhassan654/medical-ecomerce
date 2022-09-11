@@ -58,14 +58,15 @@ const SwipeableTextMobileStepper = () => {
   return (
     <Box
       sx={{
-        marginBottom: 5,
+        marginBottom: 40,
         alignItems: "center",
-        width: "100%",
-        marginTop: "60px",
+        width: "cover",
+        marginTop: "10px",
       }}
     >
       <AutoPlaySwipeableViews
-        autoplay={false}
+        resistance={true}
+        autoplay={true}
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={activeStep}
         onChangeIndex={handleStepChange}
@@ -89,48 +90,14 @@ const SwipeableTextMobileStepper = () => {
                   alt={step.label}
                 />
                 <Box
-                  component="div"
+                  component="image"
                   sx={{
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "center",
-                    alignItems: "flex-start",
-                    height: "5vh",
                     marginLeft: "90px",
-                    spacing: 4,
                   }}
-                >
-                  <Typography
-                    sx={{
-                      fontFamily: "cursive",
-                      fontWeight: "bold",
-                      color: Colors.secondary,
-                    }}
-                    variant="h2"
-                  >
-                    First Message
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontFamily: "cursive",
-                      fontWeight: "bold",
-                      color: Colors.secondary,
-                    }}
-                    variant="h3"
-                  >
-                    Second Message
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontFamily: "cursive",
-                      fontWeight: "bold",
-                      color: Colors.secondary,
-                    }}
-                    variant="h4"
-                  >
-                    Third Message
-                  </Typography>
-                </Box>
+                ></Box>
               </>
             ) : null}
           </div>

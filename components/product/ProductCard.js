@@ -20,15 +20,7 @@ import {
 const ProductCard = ({ product }) => {
   return (
     <>
-      <Grid
-        item
-        md={3}
-        xs={12}
-        key={product.key}
-        sx={{
-          marginBottom: 5,
-        }}
-      >
+      <Grid item md={4} xs={12} key={product.key}>
         {/* <NextLink href={`/products`} passHref>
           <Typography>Back To All Products pages</Typography>
         </NextLink> */}

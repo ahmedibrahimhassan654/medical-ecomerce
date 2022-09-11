@@ -24,7 +24,7 @@ export const DrawerComp = ({ openDrawer, setOpenDrawer }) => {
           <CancelIcon onClick={() => setOpenDrawer(false)} />
         </Box>
         <List>
-          <ListItem divider button>
+          <ListItem divider button onClick={() => setOpenDrawer(false)}>
             <ListItemIcon>
               <ListItemText>
                 <NextLink href="/" passHref>
@@ -52,7 +52,7 @@ export const DrawerComp = ({ openDrawer, setOpenDrawer }) => {
               </ListItemText>
             </ListItemIcon>
           </ListItem>
-          <ListItem divider button>
+          <ListItem divider button onClick={() => setOpenDrawer(false)}>
             <ListItemIcon>
               <ListItemText>
                 {/* porducts Link */}
@@ -81,7 +81,7 @@ export const DrawerComp = ({ openDrawer, setOpenDrawer }) => {
               </ListItemText>
             </ListItemIcon>
           </ListItem>
-          <ListItem divider button>
+          <ListItem divider button onClick={() => setOpenDrawer(false)}>
             <ListItemIcon>
               <ListItemText>
                 {" "}
@@ -110,7 +110,7 @@ export const DrawerComp = ({ openDrawer, setOpenDrawer }) => {
               </ListItemText>
             </ListItemIcon>
           </ListItem>
-          <ListItem divider button>
+          <ListItem divider button onClick={() => setOpenDrawer(false)}>
             <ListItemIcon>
               <ListItemText>
                 {" "}
