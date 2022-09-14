@@ -62,12 +62,20 @@ const NavBar = () => {
                   }}
                 />
               </IconButton>
-              {/* <Image
-              src={"/images/logo.jpeg"}
-              width={60}
-              height={50}
-              alt="amirican affordable drugs pfarmacy"
-            /> */}
+
+              <Box
+                component="img"
+                sx={{
+                  height: 100,
+                  display: "block",
+                  alignItems: "center",
+                  maxWidth: "100%",
+                  overflow: "hidden",
+                  width: 200,
+                }}
+                src={"/images/logo_size.jpg"}
+                alt="American Affordable Drugs Pharmacy "
+              />
             </Box>
             {/* App Links  */}
 
