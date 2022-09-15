@@ -186,6 +186,29 @@ const data = {
       ],
       requiredPrescription: true,
     },
+    {
+      name: "Actinic Keratosis",
+      slug: "Actinic-Keratosis",
+      description: "Fluorouracil 5.75% Cream",
+      category: "Actinic Keratosis ",
+      image: "/images/prod3.jpg",
+      brand: "brand 5",
+      size: [
+        {
+          unit: "gm",
+          price: "55",
+          count: "40",
+          numberonStock: 5,
+        },
+        {
+          unit: "gm",
+          price: "65",
+          count: "60",
+          numberonStock: 15,
+        },
+      ],
+      requiredPrescription: true,
+    },
   ],
 };
 export default data;

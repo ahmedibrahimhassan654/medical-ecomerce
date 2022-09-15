@@ -1,4 +1,10 @@
 const classes = {
+  visible: {
+    display: "initial",
+  },
+  hidden: {
+    display: "none",
+  },
   // header
   appbar: {
     backgroundColor: "#203040",
@@ -15,6 +21,29 @@ const classes = {
     textAlign: "center",
     marginTop: 6,
     minHeight: 100,
+  },
+
+  // search
+
+  searchForm: {
+    border: "1px solid #ffffff",
+    backgroundColor: "#ffffff",
+    borderRadius: 2,
+  },
+  searchInput: {
+    paddingLeft: 1,
+    color: "#000000",
+    "& ::placeholder": {
+      color: "#606060",
+    },
+  },
+  searchButton: {
+    backgroundColor: "#f8c040",
+    padding: 1,
+    borderRadius: "0 5px 5px 0",
+    "& span": {
+      color: "#000000",
+    },
   },
 };
 

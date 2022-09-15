@@ -85,6 +85,7 @@ const SwipeableTextMobileStepper = () => {
                     maxWidth: "100%",
                     overflow: "hidden",
                     width: "100%",
+                    mt: "50px",
                   }}
                   src={step.imgPath}
                   alt={step.label}

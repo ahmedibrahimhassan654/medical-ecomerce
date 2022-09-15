@@ -14,17 +14,62 @@ import {
   Box,
   Link,
   Badge,
+  Drawer,
+  List,
+  ListItem,
+  Divider,
+  ListItemText,
+  InputBase,
 } from "@mui/material";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/material";
 import { DrawerComp } from "./DrawerComp";
 import AddToPhotosIcon from "@mui/icons-material/AddToPhotos";
+import LocalPharmacyIcon from "@mui/icons-material/LocalPharmacy";
+import { useSnackbar } from "notistack";
+import axios from "axios";
+import classes from "../../utils/classes";
+import { Router, Search } from "@mui/icons-material";
+import { useRouter } from "next/router";
 const NavBar = () => {
-  const [openDrawer, setOpenDrawer] = useState(true);
+  const router = useRouter();
+  const [categories, setCategories] = useState([]);
+  const [openDrawer, setOpenDrawer] = useState(false);
+  const [sidbarVisible, setSidebarVisible] = useState(false);
+  //const { enqueueSnackbar } = useSnackbar();
+  const fetchCategories = async () => {
+    try {
+      const { data } = await axios.get(`/api/products/categories`);
+      console.log("categories=", data);
+      setCategories(data);
+    } catch (err) {
+      console.log(err);
+      // enqueueSnackbar(getError(err), { variant: "error" });
+    }
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+  const sidebarOpenHandler = () => {
+    setSidebarVisible(true);
+  };
+  const sidebarCloseHandler = () => {
+    setSidebarVisible(false);
+  };
+  const [query, setQuery] = useState("");
+  const queryChangeHandler = (e) => {
+    setQuery(e.target.value);
+  };
+  const submitHandler = (e) => {
+    e.preventDefault();
+    router.push(`/search?query=${query}`);
+  };
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
+  const isDesktop = useMediaQuery("(min-width:600px)");
   return (
     <>
       <AppBar elevation={2} color="secondary">
@@ -60,23 +105,73 @@ const NavBar = () => {
                     //   backgroundColor: "white",
                     //   color: "Highlight",
                   }}
+                  onClick={sidebarOpenHandler}
                 />
               </IconButton>
 
               <Box
                 component="img"
                 sx={{
-                  height: 100,
+                  height: 50,
                   display: "block",
                   alignItems: "center",
                   maxWidth: "100%",
                   overflow: "hidden",
-                  width: 200,
+                  width: 50,
                 }}
                 src={"/images/logo_size.jpg"}
                 alt="American Affordable Drugs Pharmacy "
               />
             </Box>
+            <Drawer
+              anchor="left"
+              open={sidbarVisible}
+              onClose={sidebarCloseHandler}
+            >
+              <List>
+                <ListItem>
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    <Typography color="secondary">
+                      Shopping by category
+                    </Typography>
+                    <IconButton
+                      aria-label="close"
+                      onClick={sidebarCloseHandler}
+                    >
+                      <LocalPharmacyIcon color="primary" />
+                    </IconButton>
+                  </Box>
+                </ListItem>
+                <Divider light />
+                {categories.map((category) => (
+                  <NextLink
+                    key={category}
+                    href={`/search?category=${category}`}
+                    passHref
+                  >
+                    <ListItem
+                      button
+                      component="a"
+                      onClick={sidebarCloseHandler}
+                    >
+                      <ListItemText
+                        sx={{
+                          marginRight: "5px",
+                          cursor: "pointer",
+                          fontWeight: 400,
+                          marginTop: "1px",
+                        }}
+                        primary={category}
+                      ></ListItemText>
+                    </ListItem>
+                  </NextLink>
+                ))}
+              </List>
+            </Drawer>
             {/* App Links  */}
 
             {matches ? (
@@ -194,6 +289,25 @@ const NavBar = () => {
                 </Menu> */}
                     </Link>
                   </NextLink>
+                </Box>
+                <Box sx={isDesktop ? classes.visible : classes.hidden}>
+                  <form onSubmit={submitHandler}>
+                    <Box sx={classes.searchForm}>
+                      <InputBase
+                        name="query"
+                        sx={classes.searchInput}
+                        placeholder="Search products"
+                        onChange={queryChangeHandler}
+                      />
+                      <IconButton
+                        type="submit"
+                        sx={classes.searchButton}
+                        aria-label="search"
+                      >
+                        <Search />
+                      </IconButton>
+                    </Box>
+                  </form>
                 </Box>
               </>
             )}
