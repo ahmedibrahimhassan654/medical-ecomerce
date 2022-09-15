@@ -158,15 +158,7 @@ const NavBar = () => {
                       component="a"
                       onClick={sidebarCloseHandler}
                     >
-                      <ListItemText
-                        sx={{
-                          marginRight: "5px",
-                          cursor: "pointer",
-                          fontWeight: 400,
-                          marginTop: "1px",
-                        }}
-                        primary={category}
-                      ></ListItemText>
+                      <ListItemText primary={category}></ListItemText>
                     </ListItem>
                   </NextLink>
                 ))}
