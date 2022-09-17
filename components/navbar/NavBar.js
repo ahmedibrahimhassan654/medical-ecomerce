@@ -20,6 +20,7 @@ import {
   Divider,
   ListItemText,
   InputBase,
+  ListItemButton,
 } from "@mui/material";
 
 import React, { useEffect, useState } from "react";
@@ -153,13 +154,13 @@ const NavBar = () => {
                     href={`/search?category=${category}`}
                     passHref
                   >
-                    <ListItem
+                    <ListItemButton
                       button
                       component="a"
                       onClick={sidebarCloseHandler}
                     >
-                      <ListItemText primary={category}></ListItemText>
-                    </ListItem>
+                      <ListItemText primary={category}>{category}</ListItemText>
+                    </ListItemButton>
                   </NextLink>
                 ))}
               </List>
@@ -205,9 +206,10 @@ const NavBar = () => {
                   </NextLink>
 
                   {/* porducts Link */}
-                  <NextLink href="/products" passHref>
+                  <NextLink href="/search" passHref>
                     <Link underline="none">
                       <Typography
+                        //onClick={() => router.push("/search")}
                         color="primary"
                         sx={{
                           marginRight: "20px",

@@ -62,9 +62,8 @@ const ProductScreen = (props) => {
         </NextLink>
       </Box>
 
-      <div></div>
       {/* {JSON.stringify(product)} */}
-      <Grid container spacing={1}>
+      <Grid container md={12} spacing={2}>
         <Grid item md={6} xs={12}>
           <Image
             src={product.image}
