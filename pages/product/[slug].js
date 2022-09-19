@@ -24,6 +24,7 @@ const ProductScreen = (props) => {
   const { dispatch } = useContext(Store);
   const [price, setPrice] = useState("please chose pakage size");
   const [stock, setStock] = useState(0);
+  const [size, setSize] = useState({});
   // const [prescription, setPrescription] = useState();
 
   const { product } = props;
@@ -36,19 +37,25 @@ const ProductScreen = (props) => {
     );
   }
   const addToCartHandler = async () => {
-    const { data } = await axios.get(`/api/products/${product._id}`);
+    // const { data } = await axios.get(`/api/products/${product._id}`);
+
     if (stock <= 0) {
       window.alert("sorry,product is out of stock");
     }
     if (price === "please chose pakage size") {
-      window.alert("please check product package size first ");
+      window.alert("please chose product package size first ");
     }
-    dispatch({ type: "   ", payload: { ...product, quantity: 1 } });
+    if (stock > 0 && price !== "please chose pakage size") {
+      dispatch({
+        type: "CART_ADD_ITEM",
+        payload: { ...product, quantity: 1, price, stock, size },
+      });
+    }
   };
   return (
     <Layout title={product.name} description={product.description}>
       <Box sx={{ display: "flex", marginTop: 5 }}>
-        <NextLink href="/products" passHref>
+        <NextLink href="/search" passHref>
           <Link underline="none">
             <Typography
               variant="h5"
@@ -56,7 +63,7 @@ const ProductScreen = (props) => {
               component="div"
               sx={{ marginTop: 5, marginBottom: 5 }}
             >
-              back to home page
+              back to search page
             </Typography>
           </Link>
         </NextLink>
@@ -135,6 +142,7 @@ const ProductScreen = (props) => {
                           onClick={() => {
                             setPrice(size.price);
                             setStock(size.numberonStock);
+                            setSize(size);
                             // setPrescription(size.requiredPrescription);
                           }}
                         >
@@ -159,6 +167,22 @@ const ProductScreen = (props) => {
         <Grid item md={3} xs={12}>
           <Card>
             <List>
+              <ListItem>
+                <Grid container>
+                  <Grid item xs={6}>
+                    <Typography>Size</Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography>
+                      {" "}
+                      {size.count === undefined || size.unit === undefined
+                        ? "chose size"
+                        : `${size.count} ${size.unit}`}
+                      {/* {JSON.stringify(size)} */}
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </ListItem>
               <ListItem>
                 <Grid container>
                   <Grid item xs={6}>

@@ -23,7 +23,7 @@ import {
   ListItemButton,
 } from "@mui/material";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/material";
 import { DrawerComp } from "./DrawerComp";
@@ -32,13 +32,17 @@ import LocalPharmacyIcon from "@mui/icons-material/LocalPharmacy";
 import { useSnackbar } from "notistack";
 import axios from "axios";
 import classes from "../../utils/classes";
-import { Router, Search } from "@mui/icons-material";
+import { CardTravel, Router, Search } from "@mui/icons-material";
 import { useRouter } from "next/router";
+import { Store } from "../../utils/store";
 const NavBar = () => {
   const router = useRouter();
   const [categories, setCategories] = useState([]);
   const [openDrawer, setOpenDrawer] = useState(false);
   const [sidbarVisible, setSidebarVisible] = useState(false);
+  const { state, dispatch } = useContext(Store);
+
+  const { cart } = state;
   //const { enqueueSnackbar } = useSnackbar();
   const fetchCategories = async () => {
     try {
@@ -314,12 +318,24 @@ const NavBar = () => {
                 alignItems: "center",
               }}
             >
-              <IconButton color="primary" aria-label="add to shopping cart">
-                {/*  */}
-                <Badge badgeContent={4} color="primary">
-                  <AddShoppingCartIcon color="action " />
-                </Badge>
-              </IconButton>
+              <NextLink href="/cart" passHref>
+                {cart.cartItems.length > 0 ? (
+                  <IconButton color="primary" aria-label="add to shopping cart">
+                    {/*  */}
+                    <Badge badgeContent={cart.cartItems.length} color="primary">
+                      <AddShoppingCartIcon color="action " />
+                    </Badge>
+                  </IconButton>
+                ) : (
+                  <IconButton color="primary" aria-label="add to shopping cart">
+                    {/*  */}
+                    <Badge color="primary">
+                      <AddShoppingCartIcon color="action " />
+                    </Badge>
+                  </IconButton>
+                )}
+              </NextLink>
+
               <IconButton color="primary" aria-label="add to shopping cart">
                 <HowToRegIcon />
                 <Typography
