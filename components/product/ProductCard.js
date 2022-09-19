@@ -21,7 +21,7 @@ const ProductCard = ({ product }) => {
   return (
     <>
       <Grid item md={4} xs={12} key={product.key}>
-        {/* <NextLink href={`/products`} passHref>
+        {/* <NextLink href={`/search`} passHref>
           <Typography>Back To All Products pages</Typography>
         </NextLink> */}
         <Card

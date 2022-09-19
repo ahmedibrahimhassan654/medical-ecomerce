@@ -54,29 +54,28 @@ const ProductScreen = (props) => {
   };
   return (
     <Layout title={product.name} description={product.description}>
-      <Box sx={{ display: "flex", marginTop: 5 }}>
+      <Box sx={{ display: "fixed", marginTop: 5, ml: 5, mr: 5 }}>
         <NextLink href="/search" passHref>
           <Link underline="none">
             <Typography
               variant="h5"
               color="secondary"
               component="div"
-              sx={{ marginTop: 5, marginBottom: 5 }}
+              sx={{ marginTop: 10, marginBottom: 5 }}
             >
-              back to search page
+              back to Shoping page
             </Typography>
           </Link>
         </NextLink>
       </Box>
-
       {/* {JSON.stringify(product)} */}
-      <Grid container md={12} spacing={2}>
-        <Grid item md={6} xs={12}>
+      <Grid container md={12} spacing={3} sx={{ marginLeft: "15px" }}>
+        <Grid md={6} xs={12}>
           <Image
             src={product.image}
             alt={product.name}
             width={640}
-            height={640}
+            height={440}
             layout="responsive"
           ></Image>
         </Grid>
