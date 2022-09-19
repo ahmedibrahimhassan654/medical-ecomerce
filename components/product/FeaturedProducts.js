@@ -10,7 +10,7 @@ const FeaturedProducts = () => {
       <Box
         sx={{
           backgroundColor: Colors.secondary,
-          mt: -30,
+          mt: -20,
           mr: 10,
           ml: 10,
           minHeight: "100vh",

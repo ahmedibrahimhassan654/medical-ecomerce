@@ -209,6 +209,30 @@ const data = {
       ],
       requiredPrescription: true,
     },
+
+    {
+      name: "Alopecia (T1)",
+      slug: "Alopecia-(T1)",
+      description: "Tofacitinib 1% Solution or Cream",
+      category: "Alopecia",
+      image: "/images/prod3.jpg",
+      brand: "brand7    ",
+      size: [
+        {
+          unit: "ml",
+          price: "20",
+          count: "15",
+          numberonStock: 15,
+        },
+        {
+          unit: "gm",
+          price: "240",
+          count: "15",
+          numberonStock: 55,
+        },
+      ],
+      requiredPrescription: false,
+    },
   ],
 };
 export default data;
