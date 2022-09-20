@@ -133,7 +133,9 @@ const Layout = ({ title, children, description }) => {
             </Toolbar>
           </AppBar> */}
         </Box>
-        <Grid container>{children}</Grid>
+        <Grid container md={12}>
+          {children}
+        </Grid>
         {/* <Container sx={classes.main}>{children}</Container> */}
         <Footer />
         {/* <footer className={classes.footer}>

@@ -33,6 +33,21 @@ function reducer(state, action) {
       console.log("cart items", cartItems);
       return { ...state, cart: { ...state.cart, cartItems } };
     }
+    case "CART_REMOVE_ITEM": {
+      const cartItems = state.cart.cartItems.filter(
+        (item) => {
+          if (item && item.size) {
+            return item.size._id !== action.payload._id;
+          }
+          //  item.size._id !== action.payload._id;
+        } //item.size._id !== action.payload.item.size._id
+      );
+      // console.log("old cartItems", state.cart.cartItems);
+      // console.log("action.payload._id", action.payload._id);
+      // console.log("new cartItems", cartItems);
+      Cookies.set("cartItems", JSON.stringify(cartItems));
+      return { ...state, cart: { ...state.cart, cartItems } };
+    }
     default:
       return state;
   }

@@ -66,13 +66,13 @@ const ProductCard = ({ product }) => {
                 },
               }}
             >
-              <IconButton
+              {/* <IconButton
                 color="primary"
                 aria-label="add to shopping cart"
                 sx={{ marginLeft: 3 }}
               >
                 <AddShoppingCartIcon />
-              </IconButton>
+              </IconButton> */}
             </Box>
           </CardActions>
         </Card>

@@ -22,6 +22,7 @@ import { Store } from "../utils/store";
 import NextLink from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
+import axios from "axios";
 
 const CartScreen = () => {
   const { state, dispatch } = useContext(Store);
@@ -29,8 +30,27 @@ const CartScreen = () => {
   const {
     cart: { cartItems },
   } = state;
+
+  const updateCartHandler = async (size, quantity) => {
+    console.log("quantity", quantity);
+    console.log("size", size);
+    // // const { data } = await axios.get(`/api/products/${item._id}`);
+    if (size.numberonStock < quantity) {
+      window.alert("Sorry. Product is out of stock");
+      return;
+    }
+    dispatch({
+      type: "CART_ADD_ITEM",
+      payload: { ...size, quantity },
+    });
+  };
+  const removeItemHandler = (item) => {
+    // console.log("size removed", item.size);
+    // console.log("item removed", item);
+    dispatch({ type: "CART_REMOVE_ITEM", payload: item.size });
+  };
   return (
-    <Layout title="shoping cart">
+    <Layout title="shoping cart" height="100%">
       <Typography
         variant="h5"
         color="secondary"
@@ -74,7 +94,7 @@ const CartScreen = () => {
                     <TableCell>Size</TableCell>
                     <TableCell align="right">Quantity</TableCell>
                     <TableCell align="right">Price</TableCell>
-                    <TableCell align="right">Required Prescription</TableCell>
+                    <TableCell align="center">Required Prescription</TableCell>
                     <TableCell align="right">Action</TableCell>
                   </TableRow>
                 </TableHead>
@@ -106,28 +126,42 @@ const CartScreen = () => {
                           </NextLink>
                         </TableCell>
                         {/* Size  */}
-                        <TableCell>
-                          <Typography>{`${item.size.count} ${item.size.unit}`}</Typography>
-                        </TableCell>
-                        {/* size quantity */}
-                        <TableCell align="right">
-                          <Select
-                            value={item.quantity}
-                            // onChange={(e) =>
-                            //   updateCartHandler(item, e.target.value)
-                            // }
-                          >
-                            {[...Array(item.size.numberonStock).keys()].map(
-                              (x) => (
-                                <MenuItem key={x + 1} value={x + 1}>
-                                  {x + 1}
-                                </MenuItem>
-                              )
-                            )}
-                          </Select>
-                        </TableCell>
-                        {/* size price */}
-                        <TableCell align="right">${item.size.price}</TableCell>
+                        {item.size ? (
+                          <>
+                            <TableCell>
+                              <Typography>{`${item.size.count} ${item.size.unit}`}</Typography>
+                            </TableCell>{" "}
+                            {/* size quantity */}
+                            <TableCell align="right">
+                              <Select
+                                value={item.quantity}
+                                onChange={(e) =>
+                                  updateCartHandler(
+                                    item.size._id,
+                                    e.target.value
+                                  )
+                                }
+                              >
+                                {[...Array(item.size.numberonStock).keys()].map(
+                                  (x) => (
+                                    <MenuItem key={x + 1} value={x + 1}>
+                                      {x + 1}
+                                    </MenuItem>
+                                  )
+                                )}
+                              </Select>
+                            </TableCell>
+                            {/* size price */}
+                            <TableCell align="right">
+                              ${item.size.price}
+                            </TableCell>
+                          </>
+                        ) : (
+                          <>
+                            <p>Not found</p>
+                          </>
+                        )}
+
                         <TableCell align="center">
                           {/* {JSON.stringify(item.requiredPrescription)} */}
                           {item.requiredPrescription &&
@@ -141,7 +175,7 @@ const CartScreen = () => {
                           <Button
                             variant="contained"
                             color="secondary"
-                            //  onClick={() => removeItemHandler(item)}
+                            onClick={() => removeItemHandler(item)}
                           >
                             x
                           </Button>
