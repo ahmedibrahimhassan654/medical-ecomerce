@@ -21,7 +21,7 @@ function reducer(state, action) {
       const newItem = action.payload;
       console.log("from store ", newItem);
       const existItem = state.cart.cartItems.find(
-        (item) => item._id === newItem._id && item.size._id === newItem.size._id
+        (item) => item._id === newItem._id
       );
       const cartItems = existItem
         ? state.cart.cartItems.map((item) =>
@@ -32,6 +32,22 @@ function reducer(state, action) {
       Cookies.set("cartItems", JSON.stringify(cartItems));
       console.log("cart items", cartItems);
       return { ...state, cart: { ...state.cart, cartItems } };
+    }
+    case "UPDATE_QUANTITY SIZE": {
+      const newSize = action.payload;
+      console.log("new size ", newSize);
+      const existItem = state.cart.cartItems.find(
+        (item) => item._id === newSize._id && item.size._id === newSize.size._id
+      );
+      console.log("existItem ", "existItem");
+      const cartItems = existItem
+        ? state.cart.cartItems.map((item) =>
+            item.size._id === existItem.size._id ? newSize : item
+          )
+        : [...state.cart.cartItems, newSize];
+      // Cookies.set("cartItems", JSON.stringify(cartItems));
+      console.log("cart items", cartItems);
+      // return { ...state, cart: { ...state.cart, cartItems } };
     }
     case "CART_REMOVE_ITEM": {
       const cartItems = state.cart.cartItems.filter(

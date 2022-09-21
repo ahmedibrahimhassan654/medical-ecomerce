@@ -123,7 +123,7 @@ const Search = (props) => {
           >
             <ListItem>
               <Box width="100%" mt="20px" padding="10px">
-                <Typography textAlign="initial" mb="5px" color={Colors.info}>
+                <Typography textAlign="initial" mb="5px" color="primary">
                   categories
                 </Typography>
                 <Select fullWidth value={category} onChange={categoryHandler}>
@@ -139,7 +139,7 @@ const Search = (props) => {
             </ListItem>
             <ListItem>
               <Box width="100%" mt="20px" padding="10px">
-                <Typography textAlign="initial" mb="5px" color={Colors.info}>
+                <Typography textAlign="initial" mb="5px" color="primary">
                   Brands
                 </Typography>
                 <Select fullWidth value={brand} onChange={brandHandler}>
@@ -155,7 +155,7 @@ const Search = (props) => {
             </ListItem>
             <ListItem>
               <Box width="100%" mt="20px" padding="10px">
-                <Typography textAlign="initial" mb="5px" color={Colors.info}>
+                <Typography textAlign="initial" mb="5px" color="primary">
                   Required Prescription
                 </Typography>
 
@@ -163,6 +163,7 @@ const Search = (props) => {
                   fullWidth
                   value={requiredPrescription}
                   onChange={requiredPrescriptionsHandler}
+                  color="primary"
                 >
                   <MenuItem value="all">All</MenuItem>
 
@@ -170,7 +171,7 @@ const Search = (props) => {
                     requiredPrescriptions.map((Prescription) => (
                       <>
                         {Prescription && Prescription === true ? (
-                          <MenuItem key="Required" value={true}>
+                          <MenuItem color="primary" key="Required" value={true}>
                             Required
                           </MenuItem>
                         ) : (
@@ -191,9 +192,9 @@ const Search = (props) => {
               </Box>
             </ListItem>
 
-            <ListItem>
+            <ListItem color="primary">
               <Box width="100%" mt="20px" padding="10px">
-                <Typography textAlign="initial" mb="5px" color={Colors.info}>
+                <Typography textAlign="initial" mb="5px" color="primary">
                   Rating
                 </Typography>
 

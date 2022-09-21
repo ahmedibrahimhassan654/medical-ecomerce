@@ -85,9 +85,9 @@ const NavBar = () => {
               justifyContent: "space-between",
               width: "100%",
               alignItems: "center",
-              padding: "10px 0px",
+              // padding: "10px 0px",
             }}
-            component="div"
+            // component="div"
           >
             {/* logo Box*/}
             <Box
