@@ -31,7 +31,7 @@ const CartScreen = () => {
     cart: { cartItems },
   } = state;
 
-  const updateCartHandler = async (size, quantity) => {
+  const updateCartHandler = async (size, quantity, item) => {
     console.log("quantity", quantity);
     console.log("size", size);
     // // const { data } = await axios.get(`/api/products/${item._id}`);
@@ -39,9 +39,10 @@ const CartScreen = () => {
       window.alert("Sorry. Product is out of stock");
       return;
     }
+
     dispatch({
       type: "CART_ADD_ITEM",
-      payload: { ...size, quantity },
+      payload: { ...item, quantity },
     });
   };
   const removeItemHandler = (item) => {
@@ -137,8 +138,9 @@ const CartScreen = () => {
                                 value={item.quantity}
                                 onChange={(e) =>
                                   updateCartHandler(
-                                    item.size._id,
-                                    e.target.value
+                                    item.size,
+                                    e.target.value,
+                                    item
                                   )
                                 }
                               >
