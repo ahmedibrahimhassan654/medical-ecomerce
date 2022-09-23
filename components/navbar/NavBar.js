@@ -77,7 +77,12 @@ const NavBar = () => {
   const isDesktop = useMediaQuery("(min-width:600px)");
   return (
     <>
-      <AppBar elevation={2} color="secondary">
+      <AppBar
+        elevation={2}
+        color="secondary"
+        position="static"
+        sx={classes.appbar}
+      >
         <Toolbar>
           <Box
             sx={{
@@ -96,7 +101,6 @@ const NavBar = () => {
                 justifyContent: "flex-start",
                 alignItems: "center",
               }}
-              component="div"
             >
               <IconButton>
                 <VaccinesIcon

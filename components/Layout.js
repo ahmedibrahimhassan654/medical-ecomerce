@@ -33,7 +33,7 @@ const Layout = ({ title, children, description }) => {
   const theme = createTheme({
     typography: {
       h1: {
-        fontSize: "16rem",
+        fontSize: "1.6rem",
         fontWeight: 400,
         margin: "1rem 0",
       },
@@ -65,7 +65,7 @@ const Layout = ({ title, children, description }) => {
   };
 
   return (
-    <div>
+    <>
       <Head>
         <title>
           {title
@@ -76,9 +76,9 @@ const Layout = ({ title, children, description }) => {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Box>
-          <NavBar></NavBar>
-          {/* <AppBar position="static" sx={classes.appbar}>
+
+        <NavBar></NavBar>
+        {/* <AppBar position="static" sx={classes.appbar}>
             <Toolbar>
               <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={3}>
@@ -132,7 +132,7 @@ const Layout = ({ title, children, description }) => {
               </Box>
             </Toolbar>
           </AppBar> */}
-        </Box>
+
         <Grid container md={12}>
           {children}
         </Grid>
@@ -144,7 +144,7 @@ const Layout = ({ title, children, description }) => {
           </Typography>
         </footer> */}
       </ThemeProvider>
-    </div>
+    </>
   );
 };
 

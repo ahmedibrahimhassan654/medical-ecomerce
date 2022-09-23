@@ -10,7 +10,6 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 
-
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const images = [
@@ -79,12 +78,11 @@ const SwipeableTextMobileStepper = () => {
                   component="img"
                   sx={{
                     height: 500,
-                    display: "block",
+                    display: "cover",
                     alignItems: "center",
                     maxWidth: "100%",
                     overflow: "hidden",
                     width: "100%",
-                    mt: "50px",
                   }}
                   src={step.imgPath}
                   alt={step.label}

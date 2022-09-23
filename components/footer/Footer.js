@@ -12,9 +12,9 @@ const Footer = () => {
           px={{ xs: 3, sm: 10 }}
           py={{ xs: 5, sm: 10 }}
           sx={{
-            backgroundColor: "#208080",
+            backgroundColor: "#203040",
             mt: 30,
-            minHeight: "30vh",
+            minHeight: "100%",
             boxShadow: "40px 20px 40px 10px rgba(0, 0, 0, 0.2)",
           }}
         >

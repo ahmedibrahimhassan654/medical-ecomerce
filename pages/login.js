@@ -1,122 +1,166 @@
 import {
+  Box,
+  Button,
+  FilledInput,
+  FormControl,
+  Grid,
+  IconButton,
+  InputAdornment,
+  InputLabel,
   List,
   ListItem,
-  Typography,
+  OutlinedInput,
   TextField,
-  Button,
+  Typography,
   Link,
 } from "@mui/material";
-//import axios from "axios";
-import { useRouter } from "next/router";
-import NextLink from "next/link";
-import React, { useContext, useEffect } from "react";
+import { Container } from "@mui/system";
+import React, { useState } from "react";
 import Layout from "../components/Layout";
-//import { Store } from "../utils/Store";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import NextLink from "next/link";
+const Login = () => {
+  const [values, setValues] = useState({
+    showPassword: false,
+  });
 
-import { Controller, useForm } from "react-hook-form";
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
 
-import Form from "../components/Form";
-const login = () => {
-  const {
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm();
-
-  const submitHandler = async ({ email, password }) => {
-    closeSnackbar();
-    // try {
-    //   const { data } = await axios.post("/api/users/login", {
-    //     email,
-    //     password,
-    //   });
-    //   dispatch({ type: "USER_LOGIN", payload: data });
-    //   Cookies.set("userInfo", JSON.stringify(data));
-    //   router.push(redirect || "/");
-    // } catch (err) {
-    //   enqueueSnackbar(getError(err), { variant: "error" });
-    // }
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
   };
   return (
-    <Layout title="Login">
-      <Form onSubmit={handleSubmit(submitHandler)}>
-        <Typography component="h6" variant="h6">
-          Login
-        </Typography>
-        <List>
-          <ListItem>
-            <Controller
-              name="email"
-              control={control}
-              defaultValue=""
-              rules={{
-                required: true,
-                pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
-              }}
-              render={({ field }) => (
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  id="email"
-                  label="Email"
-                  inputProps={{ type: "email" }}
-                  error={Boolean(errors.email)}
-                  helperText={
-                    errors.email
-                      ? errors.email.type === "pattern"
-                        ? "Email is not valid"
-                        : "Email is required"
-                      : ""
+    <Layout title={"login"}>
+      <Container
+        sx={{
+          marginTop: 5,
+        }}
+      >
+        <form>
+          <Typography
+            variant="h1"
+            component="h1"
+            sx={{
+              marginTop: 5,
+            }}
+            textAlign="center"
+          >
+            Login
+          </Typography>
+          <List>
+            <ListItem>
+              <TextField
+                variant="outlined"
+                fullWidth
+                id="email"
+                label="Email"
+                inputProps={{ type: "email" }}
+                sx={{
+                  marginTop: 5,
+                }}
+              ></TextField>
+            </ListItem>
+
+            <ListItem>
+              <FormControl
+                variant="outlined"
+                fullWidth
+                sx={{
+                  marginTop: 5,
+                }}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              >
+                <InputLabel htmlFor="outlined-adornment-password">
+                  Password
+                </InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-password"
+                  type={values.showPassword ? "text" : "password"}
+                  value={values.password}
+                  onChange={handleChange("password")}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {values.showPassword ? (
+                          <VisibilityOff />
+                        ) : (
+                          <Visibility />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
                   }
-                  {...field}
-                ></TextField>
-              )}
-            ></Controller>
-          </ListItem>
-          <ListItem>
-            <Controller
-              name="password"
-              control={control}
-              defaultValue=""
-              rules={{
-                required: true,
-                minLength: 6,
-              }}
-              render={({ field }) => (
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  id="password"
                   label="Password"
-                  inputProps={{ type: "password" }}
-                  error={Boolean(errors.password)}
-                  helperText={
-                    errors.password
-                      ? errors.password.type === "minLength"
-                        ? "Password length is more than 5"
-                        : "Password is required"
-                      : ""
-                  }
-                  {...field}
-                ></TextField>
-              )}
-            ></Controller>
-          </ListItem>
-          <ListItem>
-            <Button variant="contained" type="submit" fullWidth color="primary">
-              Login
-            </Button>
-          </ListItem>
-          <ListItem>
-            Don&apos;t have an account? &nbsp;
-            <NextLink href={`/register`} passHref>
-              <Link>Register</Link>
-            </NextLink>
-          </ListItem>
-        </List>
-      </Form>
+                />
+              </FormControl>
+            </ListItem>
+
+            <ListItem>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                fullWidth
+                sx={{
+                  marginTop: 3,
+                }}
+              >
+                Login
+              </Button>
+            </ListItem>
+            <ListItem>
+              <Typography>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: " Don't have an account ? &nbsp;",
+                  }}
+                />
+                <NextLink href="/register" passHref>
+                  <Link>Register</Link>
+                </NextLink>
+              </Typography>
+            </ListItem>
+            <ListItem>
+              <Typography>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: " Forget Your apssword ? &nbsp",
+                  }}
+                />
+                <NextLink href="/forgetPassword" passHref>
+                  <Link>Reset Password</Link>
+                </NextLink>
+              </Typography>
+            </ListItem>
+          </List>
+        </form>
+      </Container>
     </Layout>
   );
 };
 
-export default login;
+export default Login;
