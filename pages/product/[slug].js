@@ -54,7 +54,7 @@ const ProductScreen = (props) => {
   };
   return (
     <Layout title={product.name} description={product.description}>
-      <Box sx={{ display: "fixed", marginTop: 5, ml: 5, mr: 5 }}>
+      <Box sx={{ display: "fixed", ml: 5, mr: 5 }}>
         <NextLink href="/search" passHref>
           <Link underline="none">
             <Typography

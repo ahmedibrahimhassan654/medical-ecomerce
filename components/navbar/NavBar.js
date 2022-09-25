@@ -327,7 +327,7 @@ const NavBar = () => {
                   <IconButton color="primary" aria-label="add to shopping cart">
                     {/*  */}
                     <Badge badgeContent={cart.cartItems.length} color="primary">
-                      <AddShoppingCartIcon color="action " />
+                      <AddShoppingCartIcon color="primary" />
                     </Badge>
                   </IconButton>
                 ) : (
@@ -339,20 +339,22 @@ const NavBar = () => {
                   </IconButton>
                 )}
               </NextLink>
+              <NextLink href="/login" passHref>
+                <IconButton color="primary" aria-label="add to shopping cart">
+                  <HowToRegIcon color="primary" />
+                  <Typography
+                    color="primary"
+                    sx={{
+                      marginRight: "20px",
+                      cursor: "pointer",
+                      fontWeight: 400,
+                    }}
+                  >
+                    Login
+                  </Typography>
+                </IconButton>
+              </NextLink>
 
-              <IconButton color="primary" aria-label="add to shopping cart">
-                <HowToRegIcon />
-                <Typography
-                  color="primary"
-                  sx={{
-                    marginRight: "20px",
-                    cursor: "pointer",
-                    fontWeight: 400,
-                  }}
-                >
-                  Register
-                </Typography>
-              </IconButton>
               {matches ? (
                 <>
                   <IconButton color="primary" aria-label="add to shopping cart">
