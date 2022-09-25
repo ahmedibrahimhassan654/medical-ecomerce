@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import {
   Box,
+  Button,
   Drawer,
+  IconButton,
   Link,
   List,
   ListItem,
@@ -16,7 +18,11 @@ import ViewCarouselIcon from "@mui/icons-material/ViewCarousel";
 import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
 import CancelIcon from "@mui/icons-material/Cancel";
 import NextLink from "next/link";
+import HowToRegIcon from "@mui/icons-material/HowToReg";
+import { Store } from "../../utils/store";
 export const DrawerComp = ({ openDrawer, setOpenDrawer }) => {
+  const { state, dispatch } = useContext(Store);
+  const { userInfo } = state;
   return (
     <Drawer anchor={"right"} open={openDrawer}>
       <Box sx={{ width: "150px", m: "15px" }}>
@@ -44,7 +50,7 @@ export const DrawerComp = ({ openDrawer, setOpenDrawer }) => {
                           fontWeight: 400,
                           marginTop: "1px",
                         }}
-                      />{" "}
+                      />
                       Home
                     </Typography>
                   </Link>
@@ -147,6 +153,47 @@ export const DrawerComp = ({ openDrawer, setOpenDrawer }) => {
                 </NextLink>
               </ListItemText>
             </ListItemIcon>
+          </ListItem>
+          <ListItem>
+            {userInfo ? (
+              <>
+                <Button
+                  sx={{
+                    cursor: "pointer",
+                    fontWeight: 400,
+                    marginTop: 30,
+                    textTransform: "initial",
+                  }}
+                >
+                  {userInfo.name}
+                </Button>
+              </>
+            ) : (
+              <>
+                <NextLink href="/login" passHref>
+                  <IconButton
+                    color="primary"
+                    aria-label="login"
+                    sx={{
+                      cursor: "pointer",
+                      fontWeight: 400,
+                      marginTop: 30,
+                    }}
+                  >
+                    <HowToRegIcon color="primary" />
+                    <Typography
+                      color="primary"
+                      sx={{
+                        cursor: "pointer",
+                        fontWeight: 400,
+                      }}
+                    >
+                      Login
+                    </Typography>
+                  </IconButton>
+                </NextLink>
+              </>
+            )}
           </ListItem>
         </List>
       </Box>

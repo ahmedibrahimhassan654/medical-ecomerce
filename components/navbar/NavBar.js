@@ -21,6 +21,9 @@ import {
   ListItemText,
   InputBase,
   ListItemButton,
+  Button,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 
 import React, { useContext, useEffect, useState } from "react";
@@ -32,9 +35,10 @@ import LocalPharmacyIcon from "@mui/icons-material/LocalPharmacy";
 import { useSnackbar } from "notistack";
 import axios from "axios";
 import classes from "../../utils/classes";
-import { CardTravel, Router, Search } from "@mui/icons-material";
+import { CardTravel, Search } from "@mui/icons-material";
 import { useRouter } from "next/router";
 import { Store } from "../../utils/store";
+import Cookies from "js-cookie";
 const NavBar = () => {
   const router = useRouter();
   const [categories, setCategories] = useState([]);
@@ -42,12 +46,12 @@ const NavBar = () => {
   const [sidbarVisible, setSidebarVisible] = useState(false);
   const { state, dispatch } = useContext(Store);
 
-  const { cart } = state;
+  const { cart, userInfo } = state;
   //const { enqueueSnackbar } = useSnackbar();
   const fetchCategories = async () => {
     try {
       const { data } = await axios.get(`/api/products/categories`);
-      console.log("categories=", data);
+      // console.log("categories=", data);
       setCategories(data);
     } catch (err) {
       console.log(err);
@@ -71,6 +75,21 @@ const NavBar = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     router.push(`/search?query=${query}`);
+  };
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const logOutHandler = () => {
+    setAnchorEl(null);
+    dispatch({ type: "USER_LOGOUT" });
+    Cookies.remove("userInfo");
+    Cookies.remove("cartItems");
+    router.push("/");
   };
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
@@ -339,21 +358,57 @@ const NavBar = () => {
                   </IconButton>
                 )}
               </NextLink>
-              <NextLink href="/login" passHref>
-                <IconButton color="primary" aria-label="add to shopping cart">
-                  <HowToRegIcon color="primary" />
-                  <Typography
-                    color="primary"
+
+              {userInfo ? (
+                <>
+                  <Button
                     sx={{
-                      marginRight: "20px",
-                      cursor: "pointer",
-                      fontWeight: 400,
+                      textTransform: "initial",
+                    }}
+                    id="basic-button"
+                    aria-controls={open ? "basic-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? "true" : undefined}
+                    onClick={handleClick}
+                  >
+                    {userInfo.name}
+                  </Button>
+                  <Menu
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    MenuListProps={{
+                      "aria-labelledby": "basic-button",
                     }}
                   >
-                    Login
-                  </Typography>
-                </IconButton>
-              </NextLink>
+                    <MenuItem onClick={handleClose}>Profile</MenuItem>
+                    <MenuItem onClick={handleClose}>My account</MenuItem>
+                    <MenuItem onClick={logOutHandler}>Logout</MenuItem>
+                  </Menu>
+                </>
+              ) : (
+                <>
+                  <NextLink href="/login" passHref>
+                    <IconButton
+                      color="primary"
+                      aria-label="add to shopping cart"
+                    >
+                      <HowToRegIcon color="primary" />
+                      <Typography
+                        color="primary"
+                        sx={{
+                          marginRight: "20px",
+                          cursor: "pointer",
+                          fontWeight: 400,
+                        }}
+                      >
+                        Login
+                      </Typography>
+                    </IconButton>
+                  </NextLink>
+                </>
+              )}
 
               {matches ? (
                 <>

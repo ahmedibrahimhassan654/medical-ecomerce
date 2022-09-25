@@ -15,13 +15,27 @@ import {
   Link,
 } from "@mui/material";
 import { Container } from "@mui/system";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import NextLink from "next/link";
 import axios from "axios";
+import { Store } from "../utils/store";
+import { useRouter } from "next/router";
+import Cookies from "js-cookie";
+
 const Login = () => {
+  const { state, dispatch } = useContext(Store);
+  const { userInfo } = state;
+  const router = useRouter();
+  const { redirect } = router.query;
+  useEffect(() => {
+    if (userInfo) {
+      router.push("/search");
+    }
+  }, []);
+
   const [values, setValues] = useState({
     showPassword: false,
   });
@@ -50,7 +64,9 @@ const Login = () => {
         password,
       });
       alert("succss Login");
-      console.log(data);
+      dispatch({ type: "USER_LOGIN", payload: data });
+      Cookies.set("userInfo", data);
+      router.push(redirect || "/");
     } catch (err) {
       console.log(err);
       alert(err.response.data ? err.response.data.message : err.message);
