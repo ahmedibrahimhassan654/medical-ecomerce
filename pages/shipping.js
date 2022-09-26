@@ -1,5 +1,7 @@
+import { Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useContext } from "react";
+import Layout from "../components/Layout";
 import { Store } from "../utils/store";
 
 const Shipping = () => {
@@ -12,7 +14,13 @@ const Shipping = () => {
     router.push("/login?redirect=/shipping");
   }
 
-  return <div>Shipping</div>;
+  return (
+    <>
+      <Layout title="shiping ">
+        <Typography>shiping page</Typography>
+      </Layout>
+    </>
+  );
 };
 
 export default Shipping;

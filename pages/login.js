@@ -24,8 +24,16 @@ import axios from "axios";
 import { Store } from "../utils/store";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
+
+import { Controller, useForm } from "react-hook-form";
 
 const Login = () => {
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
   const { state, dispatch } = useContext(Store);
   const { userInfo } = state;
   const router = useRouter();
@@ -34,7 +42,7 @@ const Login = () => {
     if (userInfo) {
       router.push("/search");
     }
-  }, []);
+  }, [userInfo]);
 
   const [values, setValues] = useState({
     showPassword: false,
@@ -42,6 +50,7 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -59,17 +68,22 @@ const Login = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const { data } = await axios.post("/api/users/login", {
         email,
         password,
       });
-      alert("succss Login");
+
+      toast.success("login success");
       dispatch({ type: "USER_LOGIN", payload: data });
-      Cookies.set("userInfo", data);
+      Cookies.set("userInfo", JSON.stringify(data));
       router.push(redirect || "/");
+      setLoading(false);
     } catch (err) {
-      console.log(err);
-      alert(err.response.data ? err.response.data.message : err.message);
+      // console.log(err);
+
+      toast.error(err.response.data ? err.response.data.message : err.message);
+      setLoading(false);
     }
   };
   return (
@@ -102,7 +116,28 @@ const Login = () => {
                   marginTop: 5,
                 }}
                 onChange={(e) => setEmail(e.target.value)}
+                // {...field}
               ></TextField>
+              {/* <Controller
+                name="email"
+                control={control}
+                render={({ field }) => (
+                  <>
+                    <TextField
+                      variant="outlined"
+                      fullWidth
+                      id="email"
+                      label="Email"
+                      inputProps={{ type: "email" }}
+                      sx={{
+                        marginTop: 5,
+                      }}
+                      //onChange={(e) => setEmail(e.target.value)}
+                      {...field}
+                    ></TextField>
+                  </>
+                )}
+              ></Controller> */}
             </ListItem>
 
             <ListItem>
@@ -172,6 +207,7 @@ const Login = () => {
                 sx={{
                   marginTop: 3,
                 }}
+                disabled={!email || !password || loading}
               >
                 Login
               </Button>
@@ -183,7 +219,10 @@ const Login = () => {
                     __html: " Don't have an account ? &nbsp;",
                   }}
                 />
-                <NextLink href="/register" passHref>
+                <NextLink
+                  href={`/register?redirect=${redirect || "/"}`}
+                  passHref
+                >
                   <Link>Register</Link>
                 </NextLink>
               </Typography>

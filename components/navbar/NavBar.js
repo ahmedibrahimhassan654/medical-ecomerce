@@ -39,6 +39,7 @@ import { CardTravel, Search } from "@mui/icons-material";
 import { useRouter } from "next/router";
 import { Store } from "../../utils/store";
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 const NavBar = () => {
   const router = useRouter();
   const [categories, setCategories] = useState([]);
@@ -89,6 +90,15 @@ const NavBar = () => {
     dispatch({ type: "USER_LOGOUT" });
     Cookies.remove("userInfo");
     Cookies.remove("cartItems");
+    toast.success("Loged Out  successfuly", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
     router.push("/");
   };
   const theme = useTheme();
@@ -337,7 +347,7 @@ const NavBar = () => {
               sx={{
                 display: "flex",
                 marginTop: 1,
-                justifyContent: "center",
+                justifyContent: "start",
                 alignItems: "center",
               }}
             >
@@ -366,9 +376,9 @@ const NavBar = () => {
                       textTransform: "initial",
                     }}
                     id="basic-button"
-                    aria-controls={open ? "basic-menu" : undefined}
+                    aria-controls={open ? "basic-menu" : "aria-labelledby"}
                     aria-haspopup="true"
-                    aria-expanded={open ? "true" : undefined}
+                    aria-expanded={open ? "true" : "aria-labelledby"}
                     onClick={handleClick}
                   >
                     {userInfo.name}
@@ -390,10 +400,7 @@ const NavBar = () => {
               ) : (
                 <>
                   <NextLink href="/login" passHref>
-                    <IconButton
-                      color="primary"
-                      aria-label="add to shopping cart"
-                    >
+                    <IconButton color="primary" aria-label="Login">
                       <HowToRegIcon color="primary" />
                       <Typography
                         color="primary"

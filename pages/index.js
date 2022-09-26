@@ -13,6 +13,7 @@ export default function Home(props) {
         <title>American Affordable Drugs Pharmacy </title>
         <meta name="description"></meta>
       </Head>
+
       <Layout>
         <HeaderComp />
         <FeaturedProducts />

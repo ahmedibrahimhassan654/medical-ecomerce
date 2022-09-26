@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 
 import { StoreProvider } from "../utils/store";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function MyApp({ Component, pageProps }) {
   const [showChild, setShowChild] = useState(false);
   useEffect(() => {
@@ -21,6 +22,9 @@ function MyApp({ Component, pageProps }) {
   } else {
     return (
       <StoreProvider>
+        <ToastContainer
+          position="top-right"
+        />
         <Component {...pageProps} />
       </StoreProvider>
     );
