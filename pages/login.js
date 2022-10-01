@@ -42,14 +42,14 @@ const Login = () => {
     if (userInfo) {
       router.push("/search");
     }
-  }, [userInfo]);
+  }, []);
 
   const [values, setValues] = useState({
     showPassword: false,
   });
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleChange = (prop) => (event) => {
@@ -65,8 +65,7 @@ const Login = () => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  const submitHandler = async (e) => {
-    e.preventDefault();
+  const submitHandler = async ({ email, password }) => {
     try {
       setLoading(true);
       const { data } = await axios.post("/api/users/login", {
@@ -93,7 +92,7 @@ const Login = () => {
           marginTop: 5,
         }}
       >
-        <form onSubmit={submitHandler}>
+        <form onSubmit={handleSubmit(submitHandler)}>
           <Typography
             variant="h1"
             component="h1"
@@ -106,96 +105,112 @@ const Login = () => {
           </Typography>
           <List>
             <ListItem>
-              <TextField
-                variant="outlined"
-                fullWidth
-                id="email"
-                label="Email"
-                inputProps={{ type: "email" }}
-                sx={{
-                  marginTop: 5,
-                }}
-                onChange={(e) => setEmail(e.target.value)}
-                // {...field}
-              ></TextField>
-              {/* <Controller
+              <Controller
                 name="email"
                 control={control}
+                defaultValue=""
+                rules={{
+                  required: true,
+                  pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                }}
                 render={({ field }) => (
-                  <>
-                    <TextField
-                      variant="outlined"
-                      fullWidth
-                      id="email"
-                      label="Email"
-                      inputProps={{ type: "email" }}
-                      sx={{
-                        marginTop: 5,
-                      }}
-                      //onChange={(e) => setEmail(e.target.value)}
-                      {...field}
-                    ></TextField>
-                  </>
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    id="email"
+                    label="Email"
+                    inputProps={{ type: "email" }}
+                    sx={{
+                      marginTop: 5,
+                    }}
+                    error={Boolean(errors.email)}
+                    helperText={
+                      errors.email
+                        ? errors.email.type === "pattern"
+                          ? "Email is not valid"
+                          : "Email is required"
+                        : ""
+                    }
+                    //  onChange={(e) => setEmail(e.target.value)}
+                    {...field}
+                  ></TextField>
                 )}
-              ></Controller> */}
+              ></Controller>
             </ListItem>
 
             <ListItem>
-              {/* <TextField
-                variant="outlined"
-                fullWidth
-                id="password"
-                label="Password"
-                inputProps={{ type: "password" }}
-                onChange={(e) => setPassword(e.target.value)}
-              ></TextField> */}
-              <FormControl
-                variant="outlined"
-                fullWidth
-                sx={{
-                  marginTop: 5,
+              <Controller
+                name="password"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: true,
+                  minLength: 6,
                 }}
-                onChange={(e) => setPassword(e.target.value)}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-              >
-                <InputLabel htmlFor="outlined-adornment-password">
-                  Password
-                </InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-password"
-                  type={values.showPassword ? "text" : "password"}
-                  value={values.password}
-                  onChange={handleChange("password")}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {values.showPassword ? (
-                          <VisibilityOff />
-                        ) : (
-                          <Visibility />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="Password"
-                />
-              </FormControl>
+                render={({ field }) => (
+                  <FormControl
+                    variant="outlined"
+                    fullWidth
+                    sx={{
+                      marginTop: 5,
+                    }}
+                    //  onChange={(e) => setPassword(e.target.value)}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {values.showPassword ? (
+                            <VisibilityOff />
+                          ) : (
+                            <Visibility />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  >
+                    <InputLabel htmlFor="outlined-adornment-password">
+                      Password
+                    </InputLabel>
+                    <OutlinedInput
+                      id="password"
+                      type={values.showPassword ? "text" : "password"}
+                      value={values.password}
+                      error={Boolean(errors.password)}
+                      //    inputProps={{ type: "password" }}
+                      // onChange={handleChange("password")}
+                      helperText={
+                        errors.password
+                          ? errors.password.type === "minLength"
+                            ? "password is more than 5"
+                            : "password is required"
+                          : ""
+                      }
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                          >
+                            {values.showPassword ? (
+                              <VisibilityOff />
+                            ) : (
+                              <Visibility />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                      label="Password"
+                      {...field}
+                    />
+                  </FormControl>
+                )}
+              ></Controller>
             </ListItem>
 
             <ListItem>
@@ -207,7 +222,7 @@ const Login = () => {
                 sx={{
                   marginTop: 3,
                 }}
-                disabled={!email || !password || loading}
+                //  disabled={!email || !password || loading}
               >
                 Login
               </Button>

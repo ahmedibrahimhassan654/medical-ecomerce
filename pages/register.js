@@ -1,15 +1,7 @@
 import {
-  Box,
   Button,
-  FilledInput,
-  FormControl,
-  Grid,
-  IconButton,
-  InputAdornment,
-  InputLabel,
   List,
   ListItem,
-  OutlinedInput,
   TextField,
   Typography,
   Link,
@@ -19,33 +11,30 @@ import {
 import { Container } from "@mui/system";
 import React, { useContext, useEffect, useState } from "react";
 import Layout from "../components/Layout";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
+
 import NextLink from "next/link";
 import axios from "axios";
 import { Store } from "../utils/store";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
-
+import { Controller, useForm } from "react-hook-form";
 const Register = () => {
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
   const { state, dispatch } = useContext(Store);
   const { userInfo } = state;
   const router = useRouter();
   const { redirect } = router.query;
   useEffect(() => {
     if (userInfo) {
-      router.push("/search");
+      router.push("/");
     }
   }, []);
 
-  const [values, setValues] = useState({
-    showPassword: false,
-  });
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [checked, setChecked] = useState(true);
   const [role, setRole] = useState("user");
   const [loading, setLoading] = useState(false);
@@ -63,8 +52,7 @@ const Register = () => {
     }
   };
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
+  const submitHandler = async ({ name, email, password, confirmPassword }) => {
     setLoading(true);
     if (password !== confirmPassword) {
       // alert("passwords don't match");
@@ -103,7 +91,7 @@ const Register = () => {
           marginTop: 5,
         }}
       >
-        <form onSubmit={submitHandler}>
+        <form onSubmit={handleSubmit(submitHandler)}>
           <Typography
             variant="h1"
             component="h1"
@@ -116,57 +104,121 @@ const Register = () => {
           </Typography>
           <List>
             <ListItem>
-              <TextField
-                variant="outlined"
-                fullWidth
-                id="name"
-                label="Name"
-                inputProps={{ type: "text" }}
-                sx={{
-                  marginTop: 5,
+              <Controller
+                name="name"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: true,
+                  minLength: 2,
                 }}
-                onChange={(e) => setName(e.target.value)}
-              ></TextField>
+                render={({ field }) => (
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    id="name"
+                    label="Name"
+                    inputProps={{ type: "name" }}
+                    error={Boolean(errors.name)}
+                    helperText={
+                      errors.name
+                        ? errors.name.type === "minLength"
+                          ? "Name length is more than 1"
+                          : "Name is required"
+                        : ""
+                    }
+                    {...field}
+                  ></TextField>
+                )}
+              ></Controller>
             </ListItem>
             <ListItem>
-              <TextField
-                variant="outlined"
-                fullWidth
-                id="email"
-                label="Email"
-                inputProps={{ type: "email" }}
-                sx={{
-                  marginTop: 5,
+              <Controller
+                name="email"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: true,
+                  pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
                 }}
-                onChange={(e) => setEmail(e.target.value)}
-              ></TextField>
+                render={({ field }) => (
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    id="email"
+                    label="Email"
+                    inputProps={{ type: "email" }}
+                    error={Boolean(errors.email)}
+                    helperText={
+                      errors.email
+                        ? errors.email.type === "pattern"
+                          ? "Email is not valid"
+                          : "Email is required"
+                        : ""
+                    }
+                    {...field}
+                  ></TextField>
+                )}
+              ></Controller>
             </ListItem>
 
             <ListItem>
-              <TextField
-                variant="outlined"
-                fullWidth
-                id="password"
-                label="Password"
-                sx={{
-                  marginTop: 5,
+              <Controller
+                name="password"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: true,
+                  minLength: 6,
                 }}
-                inputProps={{ type: "password" }}
-                onChange={(e) => setPassword(e.target.value)}
-              ></TextField>
+                render={({ field }) => (
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    id="password"
+                    label="Password"
+                    inputProps={{ type: "password" }}
+                    error={Boolean(errors.password)}
+                    helperText={
+                      errors.password
+                        ? errors.password.type === "minLength"
+                          ? "Password length is more than 5"
+                          : "Password is required"
+                        : ""
+                    }
+                    {...field}
+                  ></TextField>
+                )}
+              ></Controller>
             </ListItem>
             <ListItem>
-              <TextField
-                variant="outlined"
-                sx={{
-                  marginTop: 5,
+              <Controller
+                name="confirmPassword"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: true,
+                  minLength: 6,
                 }}
-                fullWidth
-                id="confirmPassword"
-                label="confirmPassword"
-                inputProps={{ type: "password" }}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              ></TextField>
+                render={({ field }) => (
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    id="confirmPassword"
+                    label="Confirm Password"
+                    inputProps={{ type: "password" }}
+                    error={Boolean(errors.confirmPassword)}
+                    helperText={
+                      errors.confirmPassword
+                        ? errors.confirmPassword.type === "minLength"
+                          ? "Confirm Password length is more than 5"
+                          : "Confirm  Password is required"
+                        : ""
+                    }
+                    {...field}
+                  ></TextField>
+                )}
+              ></Controller>
             </ListItem>
             <ListItem>
               <FormControlLabel
@@ -186,7 +238,7 @@ const Register = () => {
                 sx={{
                   marginTop: 3,
                 }}
-                disabled={!email || !password || !name || !confirmPassword}
+                // disabled={!email || !password || !name || !confirmPassword}
               >
                 Register
               </Button>
