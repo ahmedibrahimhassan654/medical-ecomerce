@@ -96,12 +96,22 @@ const NavBar = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
   const isDesktop = useMediaQuery("(min-width:600px)");
+
+  // product menue
+  const [anchorEl2, setAnchorEl2] = React.useState(null);
+  const open2 = Boolean(anchorEl2);
+  const handleClick2 = (event) => {
+    setAnchorEl2(event.currentTarget);
+  };
+  const handleClose2 = () => {
+    setAnchorEl2(null);
+  };
   return (
     <>
       <AppBar
         elevation={2}
         color="secondary"
-        position="static"
+        position="sticky"
         sx={classes.appbar}
       >
         <Toolbar>
@@ -216,7 +226,7 @@ const NavBar = () => {
                       <Box
                         sx={{
                           display: "flex",
-                          marginTop: 1.5,
+                          marginTop: 3,
                           flexDirection: "row",
                           justifyContent: "center",
                           alignItems: "center",
@@ -250,47 +260,87 @@ const NavBar = () => {
                     </Link>
                   </NextLink>
                   {/* porducts Link */}
-                  <NextLink href="/search" passHref>
-                    <Link underline="none">
-                      <Box
-                        sx={{
-                          display: "flex",
-                          marginTop: 1.5,
-                          flexDirection: "row",
-                          justifyContent: "space-between",
-                          alignItems: "center",
+                  <Box
+                    sx={{
+                      display: "flex",
+                      marginTop: 3,
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      alignItems: "center",
 
-                          height: "20px",
+                      height: "20px",
+                    }}
+                  >
+                    <ContactsIcon
+                      color="primary"
+                      sx={{
+                        cursor: "pointer",
+                        fontWeight: 400,
+                      }}
+                    />{" "}
+                    <Button
+                      sx={{
+                        textTransform: "initial",
+                      }}
+                      id="basic-button"
+                      aria-controls={open2 ? "basic-menu" : "aria-labelledby"}
+                      aria-haspopup="true"
+                      aria-expanded={open2 ? "true" : "aria-labelledby"}
+                      onClick={handleClick2}
+                    >
+                      <Typography
+                        //onClick={() => router.push("/search")}
+                        color="primary"
+                        sx={{
+                          marginRight: "20px",
+                          cursor: "pointer",
+                          fontWeight: 400,
+                          marginTop: "2px",
                         }}
                       >
-                        <ContactsIcon
-                          color="primary"
-                          sx={{
-                            cursor: "pointer",
-                            fontWeight: 400,
-                          }}
-                        />{" "}
-                        <Typography
-                          //onClick={() => router.push("/search")}
-                          color="primary"
-                          sx={{
-                            marginRight: "20px",
-                            cursor: "pointer",
-                            fontWeight: 400,
-                            marginTop: "2px",
-                          }}
-                        >
-                          Products
-                        </Typography>
-                      </Box>
+                        Products
+                      </Typography>
+                    </Button>
+                    <Menu
+                      id="basic-menu"
+                      anchorEl={anchorEl2}
+                      open={open2}
+                      onClose={handleClose2}
+                      MenuListProps={{
+                        "aria-labelledby": "basic-button",
+                      }}
+                    >
+                      <NextLink
+                        key="required"
+                        href={`/search?requiredPrescription=true`}
+                        passHref
+                      >
+                        <MenuItem onClick={handleClose2}>
+                          Required Prescription
+                        </MenuItem>
+                      </NextLink>
+                      <NextLink
+                        key="notRequired"
+                        href={`/search?requiredPrescription=false`}
+                        passHref
+                      >
+                        <MenuItem onClick={handleClose2}>
+                          Not Required Prescription
+                        </MenuItem>
+                      </NextLink>
+                    </Menu>
+                  </Box>
+                  {/* <NextLink href="/search" passHref>
+                    <Link underline="none">
+     
                     </Link>
-                  </NextLink>
+                  </NextLink> */}
                   <NextLink href="/Blogs" passHref>
                     <Link underline="none">
                       <Box
                         sx={{
                           display: "flex",
-                          marginTop: 1.5,
+                          marginTop: 3,
                           flexDirection: "row",
                           justifyContent: "space-between",
                           alignItems: "center",
@@ -325,7 +375,7 @@ const NavBar = () => {
                       <Box
                         sx={{
                           display: "flex",
-                          marginTop: 1.5,
+                          marginTop: 3,
                           flexDirection: "row",
                           justifyContent: "space-between",
                           alignItems: "center",
@@ -359,25 +409,26 @@ const NavBar = () => {
                       </Box>
                     </Link>
                   </NextLink>
-                </Box>
-                <Box sx={isDesktop ? classes.visible : classes.hidden}>
-                  <form onSubmit={submitHandler}>
-                    <Box sx={classes.searchForm}>
-                      <InputBase
-                        name="query"
-                        sx={classes.searchInput}
-                        placeholder="Search products"
-                        onChange={queryChangeHandler}
-                      />
-                      <IconButton
-                        type="submit"
-                        sx={classes.searchButton}
-                        aria-label="search"
-                      >
-                        <Search />
-                      </IconButton>
-                    </Box>
-                  </form>
+
+                  <Box sx={isDesktop ? classes.visible : classes.hidden}>
+                    <form onSubmit={submitHandler}>
+                      <Box sx={classes.searchForm}>
+                        <InputBase
+                          name="query"
+                          sx={classes.searchInput}
+                          placeholder="Search products"
+                          onChange={queryChangeHandler}
+                        />
+                        <IconButton
+                          type="submit"
+                          sx={classes.searchButton}
+                          aria-label="search"
+                        >
+                          <Search />
+                        </IconButton>
+                      </Box>
+                    </form>
+                  </Box>
                 </Box>
               </>
             )}

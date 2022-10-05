@@ -29,6 +29,9 @@ const classes = {
     border: "1px solid #ffffff",
     backgroundColor: "#ffffff",
     borderRadius: 2,
+    // maxHeight: 30,
+    marginTop: 2,
+    marginBottom: 1,
   },
   searchInput: {
     paddingLeft: 1,

@@ -77,7 +77,8 @@ const Search = (props) => {
     if (sort) query.sort = sort;
     if (category) query.category = category;
     if (size) query.size = size;
-    query.requiredPrescription = requiredPrescription;
+    if (requiredPrescription || !requiredPrescription)
+      query.requiredPrescription = requiredPrescription;
     if (brand) query.brand = brand;
     if (price) query.price = price;
     if (rating) query.rating = rating;
@@ -109,7 +110,7 @@ const Search = (props) => {
     filterSearch({ rating: e.target.value });
   };
   const requiredPrescriptionsHandler = (e) => {
-    console.log(" requiredPrescriptionsHandler e", e.target.value);
+    // console.log(" requiredPrescriptionsHandler e", e.target.value);
     filterSearch({ requiredPrescription: e.target.value });
   };
   return (
@@ -169,32 +170,23 @@ const Search = (props) => {
                   <MenuItem value="all">All</MenuItem>
 
                   {requiredPrescriptions &&
-                    requiredPrescriptions.map(
-                      (requiredPrescription) =>
-                        requiredPrescription && requiredPrescription == true ? (
-                          <MenuItem
-                            color="primary"
-                            key={requiredPrescription}
-                            value={requiredPrescription}
-                          >
-                            Required
-                          </MenuItem>
-                        ) : (
-                          <MenuItem
-                            key={requiredPrescription}
-                            value={requiredPrescription}
-                          >
-                            Not Required
-                          </MenuItem>
-                        )
-
-                      // <p> {JSON.stringify(requiredPrescription)}</p>
-                      // <MenuItem
-                      //   key={requiredPrescription}
-                      //   value={requiredPrescription}
-                      // >
-                      //   {JSON.stringify.requiredPrescription}
-                      // </MenuItem>
+                    requiredPrescriptions.map((requiredPrescription) =>
+                      requiredPrescription && requiredPrescription == true ? (
+                        <MenuItem
+                          color="primary"
+                          key={requiredPrescription}
+                          value={requiredPrescription}
+                        >
+                          Required
+                        </MenuItem>
+                      ) : (
+                        <MenuItem
+                          key={requiredPrescription}
+                          value={requiredPrescription}
+                        >
+                          Not Required
+                        </MenuItem>
+                      )
                     )}
                 </Select>
               </Box>
