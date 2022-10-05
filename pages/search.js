@@ -77,8 +77,10 @@ const Search = (props) => {
     if (sort) query.sort = sort;
     if (category) query.category = category;
     if (size) query.size = size;
-    if (requiredPrescription || !requiredPrescription)
-      query.requiredPrescription = requiredPrescription;
+    if (requiredPrescription) query.requiredPrescription = requiredPrescription;
+    else {
+      query.requiredPrescription = !requiredPrescription;
+    }
     if (brand) query.brand = brand;
     if (price) query.price = price;
     if (rating) query.rating = rating;
