@@ -145,7 +145,7 @@ const Search = (props) => {
                   Brands
                 </Typography>
                 <Select fullWidth value={brand} onChange={brandHandler}>
-                  <MenuItem value="all">All</MenuItem>
+                  <MenuItem value="all">Alll</MenuItem>
                   {brands &&
                     brands.map((brand) => (
                       <MenuItem key={brand} value={brand}>
