@@ -6,14 +6,14 @@ const initialState = {
   darkMode: Cookies.get("darkMode") === "ON" ? true : false,
   cart: {
     cartItems: Cookies.get("cartItems")
-      ? JSON.stringify(Cookies.get("cartItems"))
+      ? JSON.parse(Cookies.get("cartItems"))
       : [],
     shippingAddress: Cookies.get("shippingAddress")
-      ? JSON.stringify(Cookies.get("shippingAddress"))
+      ? JSON.parse(Cookies.get("shippingAddress"))
       : {},
   },
   userInfo: Cookies.get("userInfo")
-    ? JSON.stringify(Cookies.get("userInfo"))
+    ? JSON.parse(Cookies.get("userInfo"))
     : null,
 };
 

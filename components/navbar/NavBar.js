@@ -90,15 +90,7 @@ const NavBar = () => {
     dispatch({ type: "USER_LOGOUT" });
     Cookies.remove("userInfo");
     Cookies.remove("cartItems");
-    toast.success("Loged Out  successfuly", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
+    toast.success("Loged Out  successfuly");
     router.push("/");
   };
   const theme = useTheme();
@@ -220,104 +212,151 @@ const NavBar = () => {
                   }}
                 >
                   <NextLink href="/" passHref>
-                    <Link underline="none">
-                      <Typography
-                        color="primary"
+                    <Link underline="none" sx={{}}>
+                      <Box
                         sx={{
-                          marginRight: "20px",
-                          cursor: "pointer",
-                          fontWeight: 400,
+                          display: "flex",
+                          marginTop: 1.5,
+                          flexDirection: "row",
+                          justifyContent: "center",
+                          alignItems: "center",
+
+                          height: "20px",
                         }}
                       >
                         <HomeIcon
+                          color="primary"
                           sx={{
-                            marginRight: "5px",
+                            // marginRight: "5px",
                             cursor: "pointer",
                             fontWeight: 400,
-                            marginTop: "1px",
+                            //marginTop: "1px",
                           }}
-                        />{" "}
-                        Home
-                      </Typography>
+                        />
+                        <Typography
+                          color="primary"
+                          sx={{
+                            marginRight: "20px",
+                            cursor: "pointer",
+                            fontWeight: 400,
+                            marginTop: "2px",
+
+                            // backgroundColor: "red",
+                          }}
+                        >
+                          Home
+                        </Typography>
+                      </Box>
                     </Link>
                   </NextLink>
-
                   {/* porducts Link */}
                   <NextLink href="/search" passHref>
                     <Link underline="none">
-                      <Typography
-                        //onClick={() => router.push("/search")}
-                        color="primary"
+                      <Box
                         sx={{
-                          marginRight: "20px",
-                          cursor: "pointer",
-                          fontWeight: 400,
+                          display: "flex",
+                          marginTop: 1.5,
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+
+                          height: "20px",
                         }}
                       >
                         <ContactsIcon
+                          color="primary"
                           sx={{
-                            marginRight: "5px",
                             cursor: "pointer",
                             fontWeight: 400,
-                            marginTop: "1px",
                           }}
                         />{" "}
-                        Products
-                      </Typography>
+                        <Typography
+                          //onClick={() => router.push("/search")}
+                          color="primary"
+                          sx={{
+                            marginRight: "20px",
+                            cursor: "pointer",
+                            fontWeight: 400,
+                            marginTop: "2px",
+                          }}
+                        >
+                          Products
+                        </Typography>
+                      </Box>
                     </Link>
                   </NextLink>
-
                   <NextLink href="/Blogs" passHref>
                     <Link underline="none">
-                      <Typography
-                        color="primary"
+                      <Box
                         sx={{
-                          marginRight: "20px",
-                          cursor: "pointer",
-                          fontWeight: 400,
+                          display: "flex",
+                          marginTop: 1.5,
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+
+                          height: "20px",
                         }}
                       >
                         <ViewCarouselIcon
+                          color="primary"
                           sx={{
                             marginRight: "5px",
                             cursor: "pointer",
                             fontWeight: 400,
                             marginTop: "1px",
                           }}
-                        />{" "}
-                        Blogs
-                      </Typography>
+                        />
+                        <Typography
+                          color="primary"
+                          sx={{
+                            marginRight: "20px",
+                            cursor: "pointer",
+                            fontWeight: 400,
+                          }}
+                        >
+                          Blogs
+                        </Typography>
+                      </Box>
                     </Link>
                   </NextLink>
                   <NextLink href="/ContactUs" passHref>
                     <Link underline="none">
-                      <Typography
-                        color="primary"
+                      <Box
                         sx={{
-                          marginRight: "20px",
-                          cursor: "pointer",
-                          fontWeight: 400,
+                          display: "flex",
+                          marginTop: 1.5,
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+
+                          height: "20px",
                         }}
-                        aria-controls="basic-menu"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                        onClick={() => {}}
                       >
                         <ContactPhoneIcon
+                          color="primary"
                           sx={{
                             marginRight: "5px",
                             cursor: "pointer",
                             fontWeight: 400,
                             marginTop: "1px",
                           }}
-                        />{" "}
-                        Contact Us
-                      </Typography>
-                      {/* <Menu id="basic-menu" anchorEl open="false" onClose={() => {}}>
-                  <MenuItem>Men1 </MenuItem>
-                  <MenuItem>Men2 </MenuItem>
-                  <MenuItem>Men3 </MenuItem>
-                </Menu> */}
+                        />
+                        <Typography
+                          color="primary"
+                          sx={{
+                            marginRight: "20px",
+                            cursor: "pointer",
+                            fontWeight: 400,
+                          }}
+                          aria-controls="basic-menu"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                          onClick={() => {}}
+                        >
+                          Contact Us
+                        </Typography>
+                      </Box>
                     </Link>
                   </NextLink>
                 </Box>
